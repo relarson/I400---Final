@@ -15,4 +15,18 @@ application will be a world-view google map. On top of the map, icons for each p
 will be placed. When the user hovers over an icon, a window will open showing a scrollable grid
 containing all of the photos condensed to that region.
 
-GOALS:
+APIs TO BE USED:
+* Flcikr REST API - photos
+* Google Maps API - map
+* Facebook API - photos
+	* (only if needed)
+	
+LANGUAGE(s) TO BE USED:
+* Java
+
+COLLABORATION TOOLS
+* Eclipse IDE
+* EGit Eclipse add-in
+* Github Public repo
+	* host user: relarson
+	* repo name: I400---Final
