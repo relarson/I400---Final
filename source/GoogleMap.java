@@ -16,11 +16,11 @@ public class GoogleMap {
 	
 	public GoogleMap()
 	{
-		this.centerLat = 39.17259213050035;
-		this.centerLon = -86.51741981506348;
+		this.centerLat = 0;
+		this.centerLon = 0;
 		this.width = 640;
 		this.height = 640;
-		this.zoom = 15;
+		this.zoom = 1;
 
 		double realWidth = 256.00 * Math.pow(2, zoom);
 
