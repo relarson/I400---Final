@@ -13,7 +13,7 @@ public class GoogleMap {
 	
 	private double pixelsPerDegree;
 	private double pixelsPerRadian;
-	
+	/* Brett's comment */
 	public GoogleMap()
 	{
 		this.centerLat = 0;
