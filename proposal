@@ -8,6 +8,11 @@ PROJECT IDEA: Using the backbone code from CSCI-C343's IU "street-view" project
 that utilized Flickr to store and retrieve photos we plan to create an application
 that illustrates differing definitions of technology around the world.
 
+GOAL:
+To demonstrate any possible difference in the definition of technology across different
+countries, regions, or cultures. Hopefully this demonstration will be through a simply
+pictoral representation.
+
 DETAILS: Photo data will be retrieved from Flickr (and possibly Facebook if more are needed).
 Once the photo data is retrieved it will be sorted, partitioned, and cached for later use.
 The photos will be grouped by country or region (as appropriate). The display of the 
