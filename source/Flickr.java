@@ -84,8 +84,8 @@ public class Flickr {
 		url += "&api_key=" + api_key;
 		url += "&tags=" + tags;
 		url += "&hasgeo=true";
-		url += "&extras=geo,tags,url_m";
-		url += "&per_page=250";
+		url += "&extras=geo,url_m";
+		url += "&per_page=500";
 		url += "&page=" + page;
 		// System.out.println(url);
 		return httpGet(url);
