@@ -2,8 +2,8 @@ package final_project;
 import javax.swing.*;
 import java.awt.*;
 /**
- * @author Ross Larson, Jon gold, Sara Wimmer and Kyle Sprouls
- * @class CSCI-C 343
+ * @author Ross Larson and Brett Poirier
+ * @class INFO-I 400
  */
 /** A few utilities that simplify using windows in Swing.
  *  1998-99 Marty Hall, http://www.apl.jhu.edu/~hall/java/

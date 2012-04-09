@@ -5,8 +5,8 @@ import java.util.HashMap;
 
 import javax.xml.xpath.XPathExpressionException;
 /**
- * @author Ross Larson, Jon gold, Sara Wimmer and Kyle Sprouls
- * @class CSCI-C 343
+ * @author Ross Larson and Brett Poirier
+ * @class INFO-I 400
  */
 public class Photo {
 

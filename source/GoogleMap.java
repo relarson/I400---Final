@@ -1,7 +1,7 @@
 package final_project;
 /**
- * @author Ross Larson, Jon gold, Sara Wimmer and Kyle Sprouls
- * @class CSCI-C 343
+ * @author Ross Larson and Brett Poirier
+ * @class INFO-I 400
  */
 public class GoogleMap {
 	
