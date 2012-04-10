@@ -1,4 +1,4 @@
-package final_project;
+package world_viewer;
 /**
  * @author Ross Larson and Brett Poirier
  * @class INFO-I 400

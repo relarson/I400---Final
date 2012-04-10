@@ -1,4 +1,4 @@
-package final_project;
+package world_viewer;
 import javax.swing.*;
 import java.awt.*;
 /**

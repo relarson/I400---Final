@@ -1,4 +1,4 @@
-package final_project;
+package world_viewer;
 
 import java.io.IOException;
 import java.util.HashMap;
