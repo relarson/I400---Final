@@ -50,9 +50,9 @@ import javax.swing.*;
 	   private ArrayList<Photo> pathPhotos;
 	   private HashMap<String,JButton> buttons = new HashMap<String,JButton>();
 	   private ImageIcon selectedPhotoImage;
-	   private final int MID_HEIGHT = 650;
+	   private final int MID_HEIGHT = 900;
 	   private final int PHOTO_WIDTH = 500;
-	   private final int MAP_WIDTH = 650;
+	   private final int MAP_WIDTH = 900;
 	   
 		private int current;
 		
@@ -78,7 +78,7 @@ import javax.swing.*;
 		   	MapPanel.setBackground(Color.WHITE);
 		   	MapPanel.setPreferredSize(new Dimension(MAP_WIDTH,MID_HEIGHT)); 
 		   	pLabel = new JLabel(selectedPhotoImage);
-		   	pLabel.setIcon(createImageIcon("http://maps.google.com/maps/api/staticmap?center=0,0&zoom=1&size=1000x1000&sensor=false", "map"));
+		   	pLabel.setIcon(createImageIcon("http://maps.google.com/maps/api/staticmap?center=0,0&zoom=2&size=900x900&sensor=false", "map"));
 		
 		   	MapPanel.add(pLabel, BorderLayout.CENTER);
 		   	results = new ArrayList<Node>(pathMaker.nodes.values());
