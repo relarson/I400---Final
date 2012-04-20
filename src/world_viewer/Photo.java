@@ -1,8 +1,5 @@
 package world_viewer;
 
-import java.io.IOException;
-
-import javax.xml.xpath.XPathExpressionException;
 /**
  * @author Ross Larson and Brett Poirier
  * @class INFO-I 400
@@ -50,11 +47,6 @@ public class Photo {
 	 */
 	public double getLongitude() {
 		return longitude;
-	}
-
-	@Override
-	public int hashCode() {
-		return imageID.hashCode();
 	}
 
 	@Override
