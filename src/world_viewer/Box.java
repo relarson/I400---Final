@@ -3,12 +3,9 @@
  */
 package world_viewer;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
-import javax.swing.JComponent;
 
 /**
  * @author Ross and Brett
@@ -36,8 +33,8 @@ public class Box {
 	
 	/**
 	 * 
-	 * @param start
-	 * @param End
+	 * @param ID
+	 * @param point
 	 */
 	public Box (int ID, Node point) {
 		this.ID = ID;
