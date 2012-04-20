@@ -52,12 +52,12 @@ public class Flickr {
 			NodeList longs = (NodeList) xpath.read("//photo/@longitude", XPathConstants.NODESET);
 			NodeList urls = (NodeList) xpath.read("//photo/@url_m", XPathConstants.NODESET);
 			
-			for (int i = 0; i < tag.getLength(); i++) {
+			for (int i = 0; i < urls.getLength(); i++) {
 				double la, lg;
 				la = Double.parseDouble(lats.item(i).getNodeValue());
 				lg = Double.parseDouble(longs.item(i).getNodeValue());
 				
-				al.add(new Photo(urls.item(i).getNodeValue(), la, lg));
+				al.add(new Photo(titles.item(i).getNodeValue(), urls.item(i).getNodeValue(), la, lg));
 			}
 			// long curr = System.currentTimeMillis();
 			// System.out.println(page + " / " + pages + " collected. Elapsed time: " + (curr - start) + " milliseconds.");
