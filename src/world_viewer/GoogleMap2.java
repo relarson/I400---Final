@@ -43,7 +43,7 @@ import javax.swing.*;
 	   
 	   private GoogleMap gps = new GoogleMap();
 	   private Boxfinder boxMaker = new Boxfinder();
-	   private ArrayList<Node> results = new ArrayList<Node>();
+	   private Box[][] boxes = new Box[36][36];
 	   private ArrayList<Photo> boxPhotos;
 	   // TODO do I need this?
 	   private HashMap<String,JButton> buttons = new HashMap<String,JButton>();
@@ -76,20 +76,23 @@ import javax.swing.*;
 		   	pLabel.setIcon(createImageIcon("http://maps.google.com/maps/api/staticmap?center=0,0&zoom=3&size=900x900&sensor=false", "map"));
 		
 		   	MapPanel.add(pLabel, BorderLayout.CENTER);
-		   	results = new ArrayList<Node>(boxMaker.nodes.values());
+		   	boxes = boxMaker.photoGrid;
 		
-			for (Node n : results) {
-				int x = gps.longitudeToX(n.longitude);
-				int y = gps.latitudeToY(n.latitude);
-				JButton button2 = new JButton();
-				button2.setLocation(x - 23 ,y - 13);
-				button2.setSize(46,26);
-				button2.setActionCommand("selection");
-				button2.addActionListener(this);
-				
-				buttons.put(n.toString(), button2);
-				// System.out.println(button2.getText() + "  ,X = " + button2.getX() + "  ,Y = " + button2.getY());
-				pLabel.add(button2);
+			for (int i = 0 ; i < 36 ; i++) {
+				for (int j = 0 ; j < 36 ; j++) {
+					Node n = boxes[i][j].point;
+					int x = gps.longitudeToX(n.longitude);
+					int y = gps.latitudeToY(n.latitude);
+					JButton button2 = new JButton();
+					button2.setLocation(x - 23 ,y - 13);
+					button2.setSize(46,26);
+					button2.setActionCommand("selection");
+					button2.addActionListener(this);
+					
+					buttons.put(n.toString(), button2);
+					// System.out.println(button2.getText() + "  ,X = " + button2.getX() + "  ,Y = " + button2.getY());
+					pLabel.add(button2);
+				}
 			}
 			
 		

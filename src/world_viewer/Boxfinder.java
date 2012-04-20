@@ -26,13 +26,10 @@ public class Boxfinder {
 
 	ArrayList<Box> boxList;
 	ArrayList<Photo> photos = new ArrayList<Photo>();
-	Node[][] nodes = new Node[36][36];
 	Flickr flick = new Flickr();
 
 	@SuppressWarnings("unchecked")
-	public Box[][] photoGrid = new Box[36][36];
-	public HashMap<Integer, double[]> nodeLocations = new HashMap<Integer, double[]>();
-	
+	public Box[][] photoGrid = new Box[36][36];	
 
 
 	public Boxfinder() {
