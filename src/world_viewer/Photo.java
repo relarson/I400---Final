@@ -6,7 +6,7 @@ package world_viewer;
  */
 public class Photo {
 
-	public String imageID = "";
+	public String title = "";
 	public String imageURL;
 
 	public double latitude, longitude;
@@ -18,40 +18,20 @@ public class Photo {
 	 * @param latitude - Latitude coordinate of the Photo
 	 * @param longitude - Longitude coordinate of the Photo
 	 */
-	public Photo(String imageURL, double latitude, double longitude) {
+	public Photo(String title, String imageURL, double latitude, double longitude) {
+		this.title = title;
 		this.imageURL = imageURL;
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
 
 	public boolean equals(Photo other) {
-		return this.imageURL.equals(other.getImageURL());
-	}
-
-	/**
-	 * @return the image
-	 */
-	public String getImageURL() {
-		return imageURL;
-	}
-
-	/**
-	 * @return the latitude
-	 */
-	public double getLatitude() {
-		return latitude;
-	}
-
-	/**
-	 * @return the longitude
-	 */
-	public double getLongitude() {
-		return longitude;
+		return this.imageURL.equals(other.imageURL);
 	}
 
 	@Override
 	public String toString() {
-		return " Lat: " + latitude + "\nLong: " + longitude + "\n URL: " + imageURL;
+		return "Title: " + title + "\n  Lat: " + latitude + "\n Long: " + longitude + "\n URL: " + imageURL;
 	}
 
 }

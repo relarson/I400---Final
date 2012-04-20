@@ -46,9 +46,8 @@ public class Flickr {
 				XPathConstants.STRING));
 		//System.out.println(flickrSearch(tags, 1));
 
-		while (page <= pages) {
-			NodeList tag = (NodeList) xpath.read("//photo/@tags",	XPathConstants.NODESET);
-			// NodeList titles = (NodeList) xpath.read("//photo/@title", XPathConstants.NODESET);
+		while (page <= pages) {;
+			NodeList titles = (NodeList) xpath.read("//photo/@title", XPathConstants.NODESET);
 			NodeList lats = (NodeList) xpath.read("//photo/@latitude", XPathConstants.NODESET);
 			NodeList longs = (NodeList) xpath.read("//photo/@longitude", XPathConstants.NODESET);
 			NodeList urls = (NodeList) xpath.read("//photo/@url_m", XPathConstants.NODESET);
@@ -58,7 +57,7 @@ public class Flickr {
 				la = Double.parseDouble(lats.item(i).getNodeValue());
 				lg = Double.parseDouble(longs.item(i).getNodeValue());
 				
-				al.add(new Photo(tag.item(i).getNodeValue(), urls.item(i).getNodeValue(), la, lg));
+				al.add(new Photo(urls.item(i).getNodeValue(), la, lg));
 			}
 			// long curr = System.currentTimeMillis();
 			// System.out.println(page + " / " + pages + " collected. Elapsed time: " + (curr - start) + " milliseconds.");
