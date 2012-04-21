@@ -35,6 +35,7 @@ public class Box {
 	 * 
 	 * @param ID
 	 * @param point
+	 * @param title
 	 */
 	public Box (int ID, Node point) {
 		this.ID = ID;

@@ -27,6 +27,7 @@ public class Boxfinder {
 	ArrayList<Box> boxList;
 	ArrayList<Photo> photos = new ArrayList<Photo>();
 	Flickr flick = new Flickr();
+	
 
 	@SuppressWarnings("unchecked")
 	public Box[][] photoGrid = new Box[36][36];	

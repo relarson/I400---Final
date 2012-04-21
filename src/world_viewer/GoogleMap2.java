@@ -46,7 +46,7 @@ import javax.swing.*;
 	   private Box[][] boxes = new Box[36][36];
 	   private ArrayList<Photo> boxPhotos;
 	   // TODO do I need this?
-	   private HashMap<String,JButton> buttons = new HashMap<String,JButton>();
+	   private JButton[] buttons = new JButton[36*36];
 	   private ImageIcon selectedPhotoImage;
 	   private final int MID_HEIGHT = 600;
 	   private final int PHOTO_WIDTH = 500;
@@ -86,10 +86,10 @@ import javax.swing.*;
 					JButton button2 = new JButton();
 					button2.setLocation(x - 23 ,y - 13);
 					button2.setSize(46,26);
-					button2.setActionCommand("selection");
+					button2.setActionCommand("node:" + i + ":" + j);
 					button2.addActionListener(this);
 					
-					buttons.put(n.toString(), button2);
+					buttons[i+36*j] = button2;
 					// System.out.println(button2.getText() + "  ,X = " + button2.getX() + "  ,Y = " + button2.getY());
 					pLabel.add(button2);
 				}
@@ -137,69 +137,57 @@ import javax.swing.*;
 	   	
 	   public void actionPerformed(ActionEvent e) {
 	   	String command = e.getActionCommand();
-	   	if (command.equals("selection")) {
+	   	if (command.substring(0, 4).equals("node")) {
 	   		JButton buttonClicked = (JButton) e.getSource();
-	   		Node temp = boxMaker.nodes.get(buttonClicked.getText());
-	   		// System.out.println("Button pressed. It was for the node at: " + temp.id);
-	   		if (fromNode == null) {
-	   			fromNode = temp;
-	   		}
-	   		else if (towardNode == null) {
-	   			towardNode = temp;
-	   		}
-	   		else {
-	   			fromNode = temp;
-	   			towardNode = null;
-	   		}
-	   		
-	   		// call dijkstra in Pathfinder to poulate pathPhotos
-	   		if (fromNode != null && towardNode != null) {
+	   		String[] parts = command.split(":");
+	   		int i = Integer.parseInt(parts[1]);
+	   		int j = Integer.parseInt(parts[2]);
+	   		Box b = boxes[i][j];
+	   		Node n = b.point;
+	   		// System.out.println("Button pressed. It was for box #: " + b.ID);
+	   	
+   			if (b.photos.size() >= 1) {
+   				Photo p = b.photos.poll();
+   				photoLabel.setIcon(createImageIcon(p.imageURL, p.title));
+	   			current = 0;
+	   			if (b.photos.size() > 1) {
+	   				next.setEnabled(true);
+	   				prev.setEnabled(false);
+	   			}
 	   			string = "";
-	   			boxMaker.dijkstra(fromNode, towardNode);
-	   			boxPhotos = boxMaker.pathPhotos;
-	   			if (boxPhotos.size() >= 1) {
-	   				photoLabel.setIcon(createImageIcon(boxPhotos.get(0).imageURL, "Edge from " + boxPhotos.get(0).from + " to " + boxPhotos.get(0).toward));
-		   			current = 0;
-		   			if (boxPhotos.size() > 1) {
-		   				next.setEnabled(true);
-		   				prev.setEnabled(false);
-		   			}
-		   			string = "";
-		   			Collection<JButton> c = buttons.values();
-		   			for (JButton j : c) {
-		   				j.setBackground(ButtonDefault);
-		   			}
-		   			
-		   			pLabel.getGraphics().setColor(Color.GREEN);
-		   			for (int j = boxMaker.path.size() - 1; j>0; j--) {
-		   				// this will cycle through all the edges for that Node, this way you can check the ends
-		   				for (Edge ed : boxMaker.path.get(j).edges) {	
-		   					if (ed.end.equals(boxMaker.path.get(j-1))) {
+	   			for (JButton jb : buttons) {
+	   				jb.setBackground(ButtonDefault);
+	   			}
+	   			
+	   			pLabel.getGraphics().setColor(Color.GREEN);
+	   			for (int j = boxMaker.path.size() - 1; j>0; j--) {
+	   				// this will cycle through all the edges for that Node, this way you can check the ends
+	   				for (Edge ed : boxMaker.path.get(j).edges) {	
+	   					if (ed.end.equals(boxMaker.path.get(j-1))) {
 //		   						Line2D line = new Line2D.Double(gps.longitudeToX(ed.start.photo.longitude), gps.latitudeToY(ed.start.photo.latitude),
 //		   								gps.longitudeToX(ed.end.photo.longitude), gps.latitudeToY(ed.end.photo.latitude));
 //		   						pLabel.getGraphics().drawLine((int) line.getX1(), (int) line.getY1(), (int) line.getX2(), (int) line.getY2());
-		   						string += (boxMaker.path.get(j).id + " --> ");
-		   					}
-		   				}
-		   				if (j < boxMaker.path.size() - 1) {
-		   					buttons.get(boxMaker.path.get(j).id).setBackground(Color.CYAN);
-		   				}
-		   				else if (j == boxMaker.path.size() - 1) {
-		   					buttons.get(boxMaker.path.get(j).id).setBackground(Color.GREEN);
-		   				}
-		   			}
-		   			buttons.get(boxMaker.path.get(0).id).setBackground(Color.RED);
-		   			string += (boxMaker.path.get(0).id + "\n");
-		   			if (pathArea != null) {
-		   				photoPanel.remove(pathArea);
-		   			}
-		   			pathArea =  new JTextField("Path: " + string);
-		   			photoPanel.add(pathArea, BorderLayout.SOUTH);
+	   						string += (boxMaker.path.get(j).id + " --> ");
+	   					}
+	   				}
+	   				if (j < boxMaker.path.size() - 1) {
+	   					buttons.get(boxMaker.path.get(j).id).setBackground(Color.CYAN);
+	   				}
+	   				else if (j == boxMaker.path.size() - 1) {
+	   					buttons.get(boxMaker.path.get(j).id).setBackground(Color.GREEN);
+	   				}
 	   			}
-	   			else {
-	   				// System.out.println("pathPhotos is empty.");
+	   			buttons.get(boxMaker.path.get(0).id).setBackground(Color.RED);
+	   			string += (boxMaker.path.get(0).id + "\n");
+	   			if (pathArea != null) {
+	   				photoPanel.remove(pathArea);
 	   			}
-	   		}
+	   			pathArea =  new JTextField("Path: " + string);
+	   			photoPanel.add(pathArea, BorderLayout.SOUTH);
+   			}
+   			else {
+   				// System.out.println("pathPhotos is empty.");
+   			}
 	   	}
 	   	else if (command.equals("next")) {
 	   		current++;
