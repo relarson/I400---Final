@@ -77,8 +77,8 @@ public class Boxfinder {
 	public void assignPhotosToBoxes() {
 		for (Photo p : photos) {
 			int i, j;
-			i = (int) (p.longitude % 36);
-			j = (int) (p.latitude % 36);
+			i = (int) ((p.longitude + 180) % 36);
+			j = (int) ((-1*p.latitude + 90) % 36);
 			photoGrid[i][j].add(p);
 		}
 	}
