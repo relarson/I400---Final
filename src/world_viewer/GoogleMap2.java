@@ -25,8 +25,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
- * @authors Ross Larson, Jon Gold, & Kyle Sprouls
- * @class CSCI-C 343
+ * @authors Ross Larson and Brett Poirier
+ * @class INFO-I 400
  * 
  */
 public class GoogleMap2 implements ActionListener {
