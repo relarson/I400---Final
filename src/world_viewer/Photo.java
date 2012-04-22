@@ -5,7 +5,6 @@ package world_viewer;
  * @class INFO-I 400
  */
 public class Photo {
-
 	public String title = "";
 	public String imageURL;
 
@@ -31,7 +30,7 @@ public class Photo {
 
 	@Override
 	public String toString() {
-		return "Title: " + title + "\n  Lat: " + latitude + "\n Long: " + longitude + "\n URL: " + imageURL;
+		return "Lat: " + latitude + "\n Long: " + longitude + "\n URL: " + imageURL;
 	}
 
 }

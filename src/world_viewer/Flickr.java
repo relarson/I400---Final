@@ -52,7 +52,7 @@ public class Flickr {
 		String flickResults = flickrSearch(tags, 1);
 		xpath = new XPathReader(flickResults);
 		pages = Integer.parseInt((String) xpath.read("//photos/@pages", XPathConstants.STRING));
-		output = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><rsp stat=\"ok\">";
+		output = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><rsp stat=\"ok\">" + " ";
 		//System.out.println(flickResults);
 
 		while (page <= pages) {
@@ -65,7 +65,7 @@ public class Flickr {
 						+ photo.getNamedItem("url_m") + " " + photo.getNamedItem("latitude") + " "
 						+ photo.getNamedItem("longitude") + " />";
 				//System.out.println(element);
-				output = output + element;
+				output = output + element + " ";
 			}
 			long curr = System.currentTimeMillis();
 			System.out.println(page + " / " + pages + " collected. Elapsed time: " + (curr - start)
