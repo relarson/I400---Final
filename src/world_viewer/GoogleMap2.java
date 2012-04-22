@@ -43,11 +43,9 @@ public class GoogleMap2 implements ActionListener {
 	private String string = "";
 
 	private Color ButtonDefault = Color.CYAN;
-	private Icon disabledIcon = createImageIcon("PNG/Clear.png",
-			"Node Disabled");
-	private Icon defaultIcon = createImageIcon("PNG/Blue1.png", "Node");
-	private Icon selectedIcon = createImageIcon("PNG/Green1.png",
-			"Node Selected");
+	private Icon disabledIcon = createImageIcon("file://WorldViewer/PNG/Clear.png", "Node Disabled");
+	private Icon defaultIcon = createImageIcon("file://WorldViewer/PNG/Blue1.png", "Node");
+	private Icon selectedIcon = createImageIcon("file://WorldViewer/PNG/Green1.png", "Node Selected");
 
 	private GoogleMap gps = new GoogleMap();
 	private Boxfinder boxMaker = new Boxfinder();
@@ -213,7 +211,7 @@ public class GoogleMap2 implements ActionListener {
 	}
 
 	private ImageIcon createImageIcon(String path, String description) {
-		java.net.URL imgURL = getClass().getResource(path);
+		java.net.URL imgURL = this.getClass().getResource(path);
 		if (imgURL != null) {
 			return new ImageIcon(imgURL, description);
 		}
