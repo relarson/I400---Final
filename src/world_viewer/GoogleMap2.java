@@ -184,7 +184,8 @@ public class GoogleMap2 implements ActionListener {
 				 */
 			}
 			else {
-				// System.out.println("pathPhotos is empty.");
+				photoLabel.setIcon(createImageIcon("Blue1.png", "No photos"));
+				//System.out.println(photoLabel.getIcon().toString());
 			}
 		}
 		else if (command.equals("next")) {
