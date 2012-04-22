@@ -24,11 +24,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-/**
- * @authors Ross Larson and Brett Poirier
- * @class INFO-I 400
- * 
- */
 public class GoogleMap2 implements ActionListener {
 
 	private JPanel mainPanel = new JPanel();
@@ -54,9 +49,9 @@ public class GoogleMap2 implements ActionListener {
 	// TODO do I need this?
 	private JButton[] buttons = new JButton[36 * 36];
 	private ImageIcon selectedPhotoImage;
-	private final int MID_HEIGHT = 600;
+	private final int MID_HEIGHT = 800;
 	private final int PHOTO_WIDTH = 500;
-	private final int MAP_WIDTH = 600;
+	private final int MAP_WIDTH = 800;
 
 	private int current;
 
@@ -80,7 +75,7 @@ public class GoogleMap2 implements ActionListener {
 		MapPanel.setPreferredSize(new Dimension(MAP_WIDTH, MID_HEIGHT));
 		pLabel = new JLabel(selectedPhotoImage);
 		pLabel.setIcon(createImageIcon(
-				"http://maps.google.com/maps/api/staticmap?center=0,0&zoom=1&size=900x900&sensor=false",
+				"http://maps.google.com/maps/api/staticmap?center=0,0&zoom=1&size=400x400&scale=2&sensor=false",
 				"map"));
 
 		MapPanel.add(pLabel, BorderLayout.CENTER);
@@ -91,7 +86,7 @@ public class GoogleMap2 implements ActionListener {
 				Node n = boxes[i][j].point;
 				int x = gps.longitudeToX(n.longitude);
 				int y = gps.latitudeToY(n.latitude);
-				JButton button2 = new JButton(defaultIcon);
+				JButton button2 = new JButton(createImageIcon("Blue1.png", "Node"));
 				button2.setLocation(x,y);
 				button2.setSize(20, 20);
 				button2.setActionCommand("node:" + i + ":" + j);
@@ -242,7 +237,7 @@ public class GoogleMap2 implements ActionListener {
 		WindowUtilities.setMotifLookAndFeel();
 		frame.add(new GoogleMap2().getPanel());
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setSize(900, 750);
+		frame.setSize(1300, 850);
 		frame.setLocationRelativeTo(null);
 		frame.pack();
 		if (screen.getHeight() <= 800)
