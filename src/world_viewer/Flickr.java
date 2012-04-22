@@ -40,7 +40,7 @@ public class Flickr {
 	 * @throws DOMException
 	 * @throws XPathExpressionException
 	 */
-	public ArrayList<Photo> cache(String tags) throws IOException, XPathExpressionException,
+	public void cache(String tags) throws IOException, XPathExpressionException,
 			DOMException {
 		ArrayList<Photo> al = new ArrayList<Photo>();
 		XPathReader xpath = null;
@@ -93,10 +93,9 @@ public class Flickr {
 		BufferedWriter out = new BufferedWriter(writer);
 		out.write(output);
 		out.close();
-		return al;
 	}
 
-	public ArrayList<Photo> unCache() throws IOException {
+	public ArrayList<Photo> uncache() throws IOException {
 		ArrayList<Photo> al = new ArrayList<Photo>();
 		File cache = new File("cache.txt");
 		FileReader cacheReader = new FileReader(cache);

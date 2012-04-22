@@ -67,7 +67,7 @@ public class Boxfinder {
 
 	public void getPhotos() throws XPathExpressionException, DOMException, IOException {
 		Long s = System.currentTimeMillis();
-		photos = flick.cache("technology");
+		photos = flick.uncache();
 		Long p = System.currentTimeMillis();
 		assignPhotosToBoxes();
 		Long e = System.currentTimeMillis();
