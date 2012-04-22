@@ -58,11 +58,11 @@ public class Boxfinder {
 	}
 	
 	public double getLat(int j) {
-		return 2.5 + 5*(j-18);
+		return 5*(j-18);
 	}
 	
 	public double getLong(int i) {
-		return 5 + 10*(i-18);
+		return 10*(i-18);
 	}
 
 	public void getPhotos() throws XPathExpressionException, DOMException, IOException {
