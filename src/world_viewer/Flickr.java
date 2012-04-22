@@ -100,21 +100,27 @@ public class Flickr {
 		File cache = new File("cache.txt");
 		FileReader cacheReader = new FileReader(cache);
 		BufferedReader bufferedCache = new BufferedReader(cacheReader);
-		XPathReader xpath = new XPathReader(bufferedCache.readLine());
-		bufferedCache.close();
+		XPathReader xpath;
+		String line = bufferedCache.readLine();
+		while (line != null) {
+			xpath = new XPathReader(line);
+			
 
-		NodeList titles = (NodeList) xpath.read("//photo/@title", XPathConstants.NODESET);
-		NodeList lats = (NodeList) xpath.read("//photo/@latitude", XPathConstants.NODESET);
-		NodeList longs = (NodeList) xpath.read("//photo/@longitude", XPathConstants.NODESET);
-		NodeList urls = (NodeList) xpath.read("//photo/@url_m", XPathConstants.NODESET);
+			NodeList titles = (NodeList) xpath.read("//photo/@title", XPathConstants.NODESET);
+			NodeList lats = (NodeList) xpath.read("//photo/@latitude", XPathConstants.NODESET);
+			NodeList longs = (NodeList) xpath.read("//photo/@longitude", XPathConstants.NODESET);
+			NodeList urls = (NodeList) xpath.read("//photo/@url_m", XPathConstants.NODESET);
 
-		for (int i = 0; i < urls.getLength(); i++) {
-			double la, lg;
-			la = Double.parseDouble(lats.item(i).getNodeValue());
-			lg = Double.parseDouble(longs.item(i).getNodeValue());
+			for (int i = 0; i < urls.getLength(); i++) {
+				double la, lg;
+				la = Double.parseDouble(lats.item(i).getNodeValue());
+				lg = Double.parseDouble(longs.item(i).getNodeValue());
 
-			al.add(new Photo(titles.item(i).getNodeValue(), urls.item(i).getNodeValue(), la, lg));
+				al.add(new Photo(titles.item(i).getNodeValue(), urls.item(i).getNodeValue(), la, lg));
+			}
+			line = bufferedCache.readLine();
 		}
+		bufferedCache.close();
 		return al;
 	}
 
