@@ -80,7 +80,7 @@ public class GoogleMap2 implements ActionListener {
 		MapPanel.setPreferredSize(new Dimension(MAP_WIDTH, MID_HEIGHT));
 		pLabel = new JLabel(selectedPhotoImage);
 		pLabel.setIcon(createImageIcon(
-				"http://maps.google.com/maps/api/staticmap?center=0,0&zoom=3&size=900x900&sensor=false",
+				"http://maps.google.com/maps/api/staticmap?center=0,0&zoom=2&size=900x900&sensor=false",
 				"map"));
 
 		MapPanel.add(pLabel, BorderLayout.CENTER);
@@ -91,8 +91,8 @@ public class GoogleMap2 implements ActionListener {
 				Node n = boxes[i][j].point;
 				int x = gps.longitudeToX(n.longitude);
 				int y = gps.latitudeToY(n.latitude);
-				JButton button2 = new JButton();
-				button2.setLocation(x - 23, y - 13);
+				JButton button2 = new JButton(defaultIcon);
+				button2.setLocation(x,y);
 				button2.setSize(46, 26);
 				button2.setActionCommand("node:" + i + ":" + j);
 				button2.addActionListener(this);
