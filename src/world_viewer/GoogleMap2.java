@@ -39,7 +39,11 @@ import javax.swing.*;
 	   private JLabel pLabel;
 	   private JLabel photoLabel;
 	   private String string = "";
+	   
 	   private Color ButtonDefault = Color.CYAN;
+	   private Icon disabledIcon = createImageIcon("PNG/Clear.png", "Node Disabled");
+	   private Icon defaultIcon = createImageIcon("PNG/Blue1.png", "Node");
+	   private Icon selectedIcon = createImageIcon("PNG/Green1.png", "Node Selected");
 	   
 	   private GoogleMap gps = new GoogleMap();
 	   private Boxfinder boxMaker = new Boxfinder();
@@ -88,6 +92,11 @@ import javax.swing.*;
 					button2.setSize(46,26);
 					button2.setActionCommand("node:" + i + ":" + j);
 					button2.addActionListener(this);
+					button2.setDisabledIcon(disabledIcon);
+	   				button2.setIcon(defaultIcon);
+	   				button2.setSelectedIcon(selectedIcon);
+	   				button2.setEnabled(true);
+					
 					
 					buttons[i+36*j] = button2;
 					// System.out.println(button2.getText() + "  ,X = " + button2.getX() + "  ,Y = " + button2.getY());
@@ -157,6 +166,7 @@ import javax.swing.*;
 	   			string = "";
 	   			for (JButton jb : buttons) {
 	   				jb.setBackground(ButtonDefault);
+	   				
 	   			}
 	   			
 	   			pLabel.getGraphics().setColor(Color.GREEN);
