@@ -43,9 +43,9 @@ public class GoogleMap2 implements ActionListener {
 	private String string = "";
 
 	private Color ButtonDefault = Color.CYAN;
-	private Icon disabledIcon = createImageIcon("file://WorldViewer/PNG/Clear.png", "Node Disabled");
-	private Icon defaultIcon = createImageIcon("file://WorldViewer/PNG/Blue1.png", "Node");
-	private Icon selectedIcon = createImageIcon("file://WorldViewer/PNG/Green1.png", "Node Selected");
+	private Icon disabledIcon = createImageIcon("Clear.png", "Node Disabled");
+	private Icon defaultIcon = createImageIcon("Blue1.png", "Node");
+	private Icon selectedIcon = createImageIcon("Green1.png", "Node Selected");
 
 	private GoogleMap gps = new GoogleMap();
 	private Boxfinder boxMaker = new Boxfinder();
