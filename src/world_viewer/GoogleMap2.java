@@ -83,23 +83,31 @@ public class GoogleMap2 implements ActionListener {
 
 		for (int i = 0; i < 36; i++) {
 			for (int j = 0; j < 36; j++) {
-				Node n = boxes[i][j].point;
-				int x = gps.longitudeToX(n.longitude);
-				int y = gps.latitudeToY(n.latitude);
-				JButton button2 = new JButton(createImageIcon("Blue1.png", "Node"));
-				button2.setLocation(x,y);
-				button2.setSize(20, 20);
-				button2.setActionCommand("node:" + i + ":" + j);
-				button2.addActionListener(this);
-				button2.setDisabledIcon(disabledIcon);
-				button2.setIcon(defaultIcon);
-				button2.setSelectedIcon(selectedIcon);
-				button2.setEnabled(true);
-
-				buttons[i + 36 * j] = button2;
-				// System.out.println(button2.getText() + "  ,X = " +
-				// button2.getX() + "  ,Y = " + button2.getY());
-				pLabel.add(button2);
+				if (boxes[i][j].photos.size() > 0) {
+					Node n = boxes[i][j].point;
+					int x = gps.longitudeToX(n.longitude);
+					int y = gps.latitudeToY(n.latitude);
+					JButton button2 = new JButton(defaultIcon);
+					button2.setLocation(x,y);
+					button2.setSize(20, 20);
+					button2.setActionCommand("node:" + i + ":" + j);
+					button2.addActionListener(this);
+					button2.setDisabledIcon(disabledIcon);
+					button2.setIcon(defaultIcon);
+					button2.setSelectedIcon(selectedIcon);
+					if (boxes[i][j].photos.size() > 0) {
+						button2.setEnabled(true);
+					}
+					else {
+						button2.setEnabled(false);
+					}
+					
+	
+					buttons[i + 36 * j] = button2;
+					// System.out.println(button2.getText() + "  ,X = " +
+					// button2.getX() + "  ,Y = " + button2.getY());
+					pLabel.add(button2);
+				}
 			}
 		}
 
@@ -154,6 +162,7 @@ public class GoogleMap2 implements ActionListener {
 			System.out.println("Button pressed. It was for box #: " + b.ID);
 
 			// copy all the photos over so we can transverse back and forth
+			boxPhotos.clear();
 			while (!b.photos.isEmpty()) {
 				boxPhotos.add(b.photos.poll());
 			}
@@ -167,16 +176,15 @@ public class GoogleMap2 implements ActionListener {
 				Photo p = boxPhotos.get(0);
 				photoLabel.setIcon(createImageIcon(p.imageURL, p.title));
 				current = 0;
+				prev.setEnabled(false);
 				if (boxPhotos.size() > 1) {
-					next.setEnabled(true);
-					prev.setEnabled(false);
+					next.setEnabled(true);		
 				}
-				/*
-				 * use this for loop if you need to modify every button for
-				 * (JButton jb : buttons) { jb.setBackground(ButtonDefault);
-				 * 
-				 * }
-				 */
+				/* use this for loop if you need to modify every button
+				for (JButton jb : buttons) { 
+					jb.setBackground(Color.CYAN);
+				}
+				//*/
 			}
 			else {
 				photoLabel.setIcon(createImageIcon("Blue1.png", "No photos"));
