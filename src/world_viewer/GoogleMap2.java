@@ -80,7 +80,7 @@ public class GoogleMap2 implements ActionListener {
 		MapPanel.setPreferredSize(new Dimension(MAP_WIDTH, MID_HEIGHT));
 		pLabel = new JLabel(selectedPhotoImage);
 		pLabel.setIcon(createImageIcon(
-				"http://maps.google.com/maps/api/staticmap?center=0,0&zoom=2&size=900x900&sensor=false",
+				"http://maps.google.com/maps/api/staticmap?center=0,0&zoom=1&size=900x900&sensor=false",
 				"map"));
 
 		MapPanel.add(pLabel, BorderLayout.CENTER);
@@ -93,7 +93,7 @@ public class GoogleMap2 implements ActionListener {
 				int y = gps.latitudeToY(n.latitude);
 				JButton button2 = new JButton(defaultIcon);
 				button2.setLocation(x,y);
-				button2.setSize(46, 26);
+				button2.setSize(20, 20);
 				button2.setActionCommand("node:" + i + ":" + j);
 				button2.addActionListener(this);
 				button2.setDisabledIcon(disabledIcon);
@@ -156,7 +156,7 @@ public class GoogleMap2 implements ActionListener {
 			int j = Integer.parseInt(parts[2]);
 			Box b = boxes[i][j];
 			Node n = b.point;
-			// System.out.println("Button pressed. It was for box #: " + b.ID);
+			System.out.println("Button pressed. It was for box #: " + b.ID);
 
 			// copy all the photos over so we can transverse back and forth
 			while (!b.photos.isEmpty()) {
