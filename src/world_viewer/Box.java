@@ -14,7 +14,7 @@ import java.util.PriorityQueue;
 public class Box {
 
 	public int ID;
-	public Node point;
+	public MapNode point;
 	public Comparator<Photo> comparator = new Comparator<Photo>() {
 		public int compare(Photo a, Photo b) {;
 			//System.out.println("Edge comparator: " + c);
@@ -37,7 +37,7 @@ public class Box {
 	 * @param point
 	 * @param title
 	 */
-	public Box (int ID, Node point) {
+	public Box (int ID, MapNode point) {
 		this.ID = ID;
 		this.point = point;
 	}
@@ -46,7 +46,7 @@ public class Box {
 		photos.add(p);
 	}
 	
-	public double calcLength(Node s, Photo e) {
+	public double calcLength(MapNode s, Photo e) {
 		//System.out.println(s + "   " + e);
 		double dx = s.latitude - e.latitude;
 		double dy = s.longitude - e.longitude;

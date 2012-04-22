@@ -84,7 +84,7 @@ public class GoogleMap2 implements ActionListener {
 		for (int i = 0; i < 36; i++) {
 			for (int j = 0; j < 36; j++) {
 				if (boxes[i][j].photos.size() > 0) {
-					Node n = boxes[i][j].point;
+					MapNode n = boxes[i][j].point;
 					int x = gps.longitudeToX(n.longitude);
 					int y = gps.latitudeToY(n.latitude);
 					JButton button2 = new JButton(defaultIcon);
@@ -158,7 +158,7 @@ public class GoogleMap2 implements ActionListener {
 			int i = Integer.parseInt(parts[1]);
 			int j = Integer.parseInt(parts[2]);
 			Box b = boxes[i][j];
-			Node n = b.point;
+			MapNode n = b.point;
 			System.out.println("Button pressed. It was for box #: " + b.ID);
 
 			// copy all the photos over so we can transverse back and forth

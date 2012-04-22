@@ -52,7 +52,7 @@ public class Boxfinder {
 	public void createBoxes() {
 		for (int i = 0 ; i < 36 ; i++) {
 			for (int j = 0 ; j < 36 ; j++) {
-				photoGrid[i][j] = new Box(i + 36*j, new Node(getLat(j), getLong(i)));
+				photoGrid[i][j] = new Box(i + 36*j, new MapNode(getLat(j), getLong(i)));
 			}
 		}
 	}
@@ -67,7 +67,7 @@ public class Boxfinder {
 
 	public void getPhotos() throws XPathExpressionException, DOMException, IOException {
 		Long s = System.currentTimeMillis();
-		photos = flick.findPhotosByTags("technology");
+		photos = flick.cache("technology");
 		Long p = System.currentTimeMillis();
 		assignPhotosToBoxes();
 		Long e = System.currentTimeMillis();
@@ -78,7 +78,7 @@ public class Boxfinder {
 		for (Photo p : photos) {
 			int i, j;
 			i = (int) ((p.longitude + 180) % 36);
-			j = (int) ((-1*p.latitude + 90) % 36);
+			j = (int) ((p.latitude + 90) % 36);
 			photoGrid[i][j].add(p);
 		}
 	}
