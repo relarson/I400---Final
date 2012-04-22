@@ -52,7 +52,7 @@ public class Flickr {
 		String flickResults = flickrSearch(tags, 1);
 		xpath = new XPathReader(flickResults);
 		pages = Integer.parseInt((String) xpath.read("//photos/@pages", XPathConstants.STRING));
-		output = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><rsp stat=\"ok\">" + "\n";
+		output = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><rsp stat=\"ok\">";
 		//System.out.println(flickResults);
 
 		while (page <= pages) {
@@ -65,7 +65,7 @@ public class Flickr {
 						+ photo.getNamedItem("url_m") + " " + photo.getNamedItem("latitude") + " "
 						+ photo.getNamedItem("longitude") + " />";
 				//System.out.println(element);
-				output = output + element + "\n";
+				output = output + element;
 			}
 			long curr = System.currentTimeMillis();
 			System.out.println(page + " / " + pages + " collected. Elapsed time: " + (curr - start)
@@ -100,17 +100,7 @@ public class Flickr {
 		File cache = new File("cache.txt");
 		FileReader cacheReader = new FileReader(cache);
 		BufferedReader bufferedCache = new BufferedReader(cacheReader);
-		XPathReader xpath;
-		String xml = "";
-		String line = bufferedCache.readLine();
-		int j = 0;
-		while (line != null) {
-			System.out.println("Read: " + (j++));
-			xml += line;
-			line = bufferedCache.readLine();
-		}
-		
-		xpath = new XPathReader(xml);
+		XPathReader xpath = new XPathReader(bufferedCache.readLine());
 		NodeList titles = (NodeList) xpath.read("//photo/@title", XPathConstants.NODESET);
 		NodeList lats = (NodeList) xpath.read("//photo/@latitude", XPathConstants.NODESET);
 		NodeList longs = (NodeList) xpath.read("//photo/@longitude", XPathConstants.NODESET);
