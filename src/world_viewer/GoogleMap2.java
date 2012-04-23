@@ -270,13 +270,13 @@ public class GoogleMap2 implements ActionListener {
 			else if (n == 1) {
 				String s = (String)JOptionPane.showInputDialog(
 	                    frame,
-	                    "How many photos would you like? Each batch of 250 takes ~4 seconds",
-	                    "Number of Photos",
+	                    "How many pages would you like? Each page takes ~4 seconds",
+	                    "Number of Pages of Photos",
 	                    JOptionPane.PLAIN_MESSAGE,
 	                    null,
 	                    null,
-	                    "2500");
-				int p = 2500;
+	                    "10");
+				int p = 10;
 				p = Integer.parseInt(s);
 				pages = p;
 			}

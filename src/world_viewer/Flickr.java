@@ -40,7 +40,7 @@ public class Flickr {
 	 * @throws DOMException
 	 * @throws XPathExpressionException
 	 */
-	public void cache(String tags) throws IOException, XPathExpressionException,
+	public void cache(String tags, int maxPages) throws IOException, XPathExpressionException,
 			DOMException {
 		ArrayList<Photo> al = new ArrayList<Photo>();
 		XPathReader xpath = null;
@@ -51,22 +51,14 @@ public class Flickr {
 		long start = System.currentTimeMillis();
 		String flickResults = flickrSearch(tags, 1);
 		xpath = new XPathReader(flickResults);
-		pages = Integer.parseInt((String) xpath.read("//photos/@pages", XPathConstants.STRING));
-		output = "<?xml version=\"1.0\" encoding=\"utf-8\" ?><rsp stat=\"ok\">" + " ";
+		pages = Integer.parseInt((String) xpath.read("//photos/@pages", XPathConstants.STRING)); 
+		if (pages > maxPages) {
+			pages = maxPages;
+		}
 		//System.out.println(flickResults);
 
 		while (page <= pages) {
-			// grab all photos from page
-			NodeList photos = (NodeList) xpath.read("//photo", XPathConstants.NODESET);
-
-			for (int i = 0; i < photos.getLength(); i++) {
-				NamedNodeMap photo = photos.item(i).getAttributes();
-				String element = "<photo " + photo.getNamedItem("title") + " "
-						+ photo.getNamedItem("url_m") + " " + photo.getNamedItem("latitude") + " "
-						+ photo.getNamedItem("longitude") + " />";
-				//System.out.println(element);
-				output = output + element + " ";
-			}
+			output = output + flickResults + "\n";
 			long curr = System.currentTimeMillis();
 			System.out.println(page + " / " + pages + " collected. Elapsed time: " + (curr - start)
 					+ " milliseconds.");
@@ -79,7 +71,6 @@ public class Flickr {
 					+ " milliseconds to request and retrieve.");
 
 		}
-		output = output + "</rsp>";
 		long end = System.currentTimeMillis();
 		System.out.println(pages + " pages collected in " + (end - start) + " milliseconds.");
 
@@ -100,22 +91,28 @@ public class Flickr {
 		File cache = new File("cache.txt");
 		FileReader cacheReader = new FileReader(cache);
 		BufferedReader bufferedCache = new BufferedReader(cacheReader);
-		XPathReader xpath = new XPathReader(bufferedCache.readLine());
-		NodeList titles = (NodeList) xpath.read("//photo/@title", XPathConstants.NODESET);
-		NodeList lats = (NodeList) xpath.read("//photo/@latitude", XPathConstants.NODESET);
-		NodeList longs = (NodeList) xpath.read("//photo/@longitude", XPathConstants.NODESET);
-		NodeList urls = (NodeList) xpath.read("//photo/@url_m", XPathConstants.NODESET);
+		String page = bufferedCache.readLine();
+		int j = 1;
+		while (page != null) {
+			//System.out.println("Page: " + (j++));
+			XPathReader xpath = new XPathReader(page);
+			NodeList titles = (NodeList) xpath.read("//photo/@title", XPathConstants.NODESET);
+			NodeList lats = (NodeList) xpath.read("//photo/@latitude", XPathConstants.NODESET);
+			NodeList longs = (NodeList) xpath.read("//photo/@longitude", XPathConstants.NODESET);
+			NodeList urls = (NodeList) xpath.read("//photo/@url_m", XPathConstants.NODESET);
 
-		for (int i = 0; i < urls.getLength(); i++) {
-			System.out.println("Parse: " + i);
-			double la, lg;
-			la = Double.parseDouble(lats.item(i).getNodeValue());
-			lg = Double.parseDouble(longs.item(i).getNodeValue());
+			for (int i = 0; i < urls.getLength(); i++) {
+				double la, lg;
+				la = Double.parseDouble(lats.item(i).getNodeValue());
+				lg = Double.parseDouble(longs.item(i).getNodeValue());
 
-			al.add(new Photo(titles.item(i).getNodeValue(), urls.item(i).getNodeValue(), la, lg));
+				al.add(new Photo(titles.item(i).getNodeValue(), urls.item(i).getNodeValue(), la, lg));
+			}
+			page = bufferedCache.readLine();
 		}
-		
+	
 		bufferedCache.close();
+		System.out.println(al.size());
 		return al;
 	}
 
@@ -133,7 +130,7 @@ public class Flickr {
 		url += "&tags=" + tags;
 		url += "&hasgeo=true";
 		url += "&extras=geo,url_m,title";
-		url += "&per_page=250";
+		url += "&per_page=500";
 		url += "&page=" + page;
 		// System.out.println(url);
 		return httpGet(url);
