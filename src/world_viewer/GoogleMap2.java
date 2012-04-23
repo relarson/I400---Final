@@ -37,9 +37,7 @@ public class GoogleMap2 implements ActionListener {
 	private JButton prev = new JButton("<-- Previous Photo");
 	private JLabel pLabel;
 	private JLabel photoLabel;
-	private String string = "";
 
-	private Color ButtonDefault = Color.CYAN;
 	private Icon disabledIcon = createImageIcon("Clear.png", "Node Disabled");
 	private Icon defaultIcon = createImageIcon("Blue1.png", "Node");
 	private Icon selectedIcon = createImageIcon("Green1.png", "Node Selected");
@@ -54,7 +52,7 @@ public class GoogleMap2 implements ActionListener {
 	private final int MID_HEIGHT = 800;
 	private final int PHOTO_WIDTH = 500;
 	private final int MAP_WIDTH = 800;
-	
+
 	private static boolean useCache = false;
 	private static int pages = 10;
 
@@ -93,7 +91,7 @@ public class GoogleMap2 implements ActionListener {
 					int x = gps.longitudeToX(n.longitude);
 					int y = gps.latitudeToY(n.latitude);
 					JButton button2 = new JButton(defaultIcon);
-					button2.setLocation(x,y);
+					button2.setLocation(x, y);
 					button2.setSize(20, 20);
 					button2.setActionCommand("node:" + i + ":" + j);
 					button2.addActionListener(this);
@@ -106,8 +104,7 @@ public class GoogleMap2 implements ActionListener {
 					else {
 						button2.setEnabled(false);
 					}
-					
-	
+
 					buttons[i + 36 * j] = button2;
 					// System.out.println(button2.getText() + "  ,X = " +
 					// button2.getX() + "  ,Y = " + button2.getY());
@@ -158,12 +155,10 @@ public class GoogleMap2 implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		if (command.substring(0, 4).equals("node")) {
-			JButton buttonClicked = (JButton) e.getSource();
 			String[] parts = command.split(":");
 			int i = Integer.parseInt(parts[1]);
 			int j = Integer.parseInt(parts[2]);
 			Box b = boxes[i][j];
-			MapNode n = b.point;
 			System.out.println("Button pressed. It was for box #: " + b.ID);
 
 			// copy all the photos over so we can transverse back and forth
@@ -183,17 +178,16 @@ public class GoogleMap2 implements ActionListener {
 				current = 0;
 				prev.setEnabled(false);
 				if (boxPhotos.size() > 1) {
-					next.setEnabled(true);		
+					next.setEnabled(true);
 				}
-				/* use this for loop if you need to modify every button
-				for (JButton jb : buttons) { 
-					jb.setBackground(Color.CYAN);
-				}
-				//*/
+				/*
+				 * use this for loop if you need to modify every button for
+				 * (JButton jb : buttons) { jb.setBackground(Color.CYAN); } //
+				 */
 			}
 			else {
 				photoLabel.setIcon(createImageIcon("Blue1.png", "No photos"));
-				//System.out.println(photoLabel.getIcon().toString());
+				// System.out.println(photoLabel.getIcon().toString());
 			}
 		}
 		else if (command.equals("next")) {
@@ -248,34 +242,22 @@ public class GoogleMap2 implements ActionListener {
 		JFrame frame = new JFrame("Map");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		WindowUtilities.setMotifLookAndFeel();
-		
+
 		File cache = new File("cache.txt");
-		if (cache != null) {
-			//Custom button text
-			Object[] options = {"Load from cache",
-			                    "Download from Flickr",
-			                    "Cancel"};
-			int n = JOptionPane.showOptionDialog(frame,
-			    "How would you like to load images?",
-			    "Image Load Options",
-			    JOptionPane.YES_NO_CANCEL_OPTION,
-			    JOptionPane.QUESTION_MESSAGE,
-			    null,
-			    options,
-			    options[0]);
-			
+		if (cache.exists()) {
+			// Custom button text
+			Object[] options = { "Load from cache", "Download from Flickr", "Cancel" };
+			int n = JOptionPane.showOptionDialog(frame, "How would you like to load images?",
+					"Image Load Options", JOptionPane.YES_NO_CANCEL_OPTION,
+					JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
 			if (n == 2) {
 				System.exit(0);
 			}
 			else if (n == 1) {
-				String s = (String)JOptionPane.showInputDialog(
-	                    frame,
-	                    "How many pages would you like? Each page takes ~4 seconds",
-	                    "Number of Pages of Photos",
-	                    JOptionPane.PLAIN_MESSAGE,
-	                    null,
-	                    null,
-	                    "10");
+				String s = (String) JOptionPane.showInputDialog(frame,
+						"How many pages would you like? Each page takes ~4 seconds",
+						"Number of Pages of Photos", JOptionPane.PLAIN_MESSAGE, null, null, "10");
 				int p = 10;
 				p = Integer.parseInt(s);
 				pages = p;
@@ -285,14 +267,9 @@ public class GoogleMap2 implements ActionListener {
 			}
 		}
 		else {
-			String s = (String)JOptionPane.showInputDialog(
-                    frame,
-                    "How many photos would you like? Each batch of 250 takes ~4 seconds",
-                    "Number of Photos",
-                    JOptionPane.PLAIN_MESSAGE,
-                    null,
-                    null,
-                    "2500");
+			String s = (String) JOptionPane.showInputDialog(frame,
+					"How many photos would you like? Each batch of 250 takes ~4 seconds",
+					"Number of Photos", JOptionPane.PLAIN_MESSAGE, null, null, "2500");
 			int p = 2500;
 			p = Integer.parseInt(s);
 			if (p == 0) {

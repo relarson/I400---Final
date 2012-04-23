@@ -3,7 +3,6 @@ package world_viewer;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,7 +15,6 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.w3c.dom.DOMException;
-import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 
 /**
@@ -35,14 +33,12 @@ public class Flickr {
 	/**
 	 * @param tags
 	 *            - the tag(s) to look for in Flickr Database
-	 * @return an ArrayList of Photos
 	 * @throws IOException
 	 * @throws DOMException
 	 * @throws XPathExpressionException
 	 */
 	public void cache(String tags, int maxPages) throws IOException, XPathExpressionException,
 			DOMException {
-		ArrayList<Photo> al = new ArrayList<Photo>();
 		XPathReader xpath = null;
 		String output = "";
 
@@ -51,11 +47,11 @@ public class Flickr {
 		long start = System.currentTimeMillis();
 		String flickResults = flickrSearch(tags, 1);
 		xpath = new XPathReader(flickResults);
-		pages = Integer.parseInt((String) xpath.read("//photos/@pages", XPathConstants.STRING)); 
+		pages = Integer.parseInt((String) xpath.read("//photos/@pages", XPathConstants.STRING));
 		if (pages > maxPages) {
 			pages = maxPages;
 		}
-		//System.out.println(flickResults);
+		// System.out.println(flickResults);
 
 		while (page <= pages) {
 			output = output + flickResults + "\n";
@@ -92,9 +88,9 @@ public class Flickr {
 		FileReader cacheReader = new FileReader(cache);
 		BufferedReader bufferedCache = new BufferedReader(cacheReader);
 		String page = bufferedCache.readLine();
-		int j = 1;
+		// int j = 1;
 		while (page != null) {
-			//System.out.println("Page: " + (j++));
+			// System.out.println("Page: " + (j++));
 			XPathReader xpath = new XPathReader(page);
 			NodeList titles = (NodeList) xpath.read("//photo/@title", XPathConstants.NODESET);
 			NodeList lats = (NodeList) xpath.read("//photo/@latitude", XPathConstants.NODESET);
@@ -110,7 +106,7 @@ public class Flickr {
 			}
 			page = bufferedCache.readLine();
 		}
-	
+
 		bufferedCache.close();
 		System.out.println(al.size());
 		return al;
