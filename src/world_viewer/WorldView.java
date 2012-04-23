@@ -159,6 +159,7 @@ public class WorldView implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		if (command.substring(0, 4).equals("node")) {
+			JButton jB = ((JButton) e.getSource());
 			String[] parts = command.split(":");
 			int i = Integer.parseInt(parts[1]);
 			int j = Integer.parseInt(parts[2]);
@@ -179,6 +180,7 @@ public class WorldView implements ActionListener {
 			if (boxPhotos.size() >= 1) {
 				Photo p = boxPhotos.get(0);
 				System.out.println(p.toString());
+				System.out.println("(" + jB.getX() + ", " + jB.getY() + ")");
 				photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 				current = 0;
 				prev.setEnabled(false);
@@ -195,7 +197,6 @@ public class WorldView implements ActionListener {
 					jb.setIcon(defaultIcon);
 				}	 
 			}
-			JButton jB = ((JButton) e.getSource());
 			jB.setIcon(selectedIcon);
 		}
 		else if (command.equals("next")) {

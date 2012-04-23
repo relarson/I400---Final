@@ -32,7 +32,7 @@ public class Photo {
 
 	@Override
 	public String toString() {
-		return "  ID: " + ID + "\n Lat: " + latitude + "\nLong: " + longitude + "\n URL: " + imageURL;
+		return "  ID: " + ID + "\n Lat: " + latitude + ", Long: " + longitude + "\n URL: " + imageURL;
 	}
 
 }
