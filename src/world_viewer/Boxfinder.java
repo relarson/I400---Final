@@ -33,10 +33,10 @@ public class Boxfinder {
 	public Box[][] photoGrid = new Box[36][36];	
 
 
-	public Boxfinder() {
+	public Boxfinder(boolean useCache, int pages) {
 		createBoxes();
 		try {
-			getPhotos();
+			getPhotos(useCache, pages);
 		}
 		catch (XPathExpressionException e) {
 			e.printStackTrace();
@@ -65,7 +65,8 @@ public class Boxfinder {
 		return 10*(i-18);
 	}
 
-	public void getPhotos() throws XPathExpressionException, DOMException, IOException {
+	public void getPhotos(boolean useCache, int pages) throws XPathExpressionException, DOMException, IOException {
+		
 		Long s = System.currentTimeMillis();
 		photos = flick.uncache();
 		Long p = System.currentTimeMillis();

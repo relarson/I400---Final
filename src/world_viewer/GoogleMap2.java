@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -43,7 +45,7 @@ public class GoogleMap2 implements ActionListener {
 	private Icon selectedIcon = createImageIcon("Green1.png", "Node Selected");
 
 	private GoogleMap gps = new GoogleMap();
-	private Boxfinder boxMaker = new Boxfinder();
+	private static Boxfinder boxMaker;
 	private Box[][] boxes = new Box[36][36];
 	private ArrayList<Photo> boxPhotos = new ArrayList<Photo>();
 	// TODO do I need this?
@@ -52,6 +54,9 @@ public class GoogleMap2 implements ActionListener {
 	private final int MID_HEIGHT = 800;
 	private final int PHOTO_WIDTH = 500;
 	private final int MAP_WIDTH = 800;
+	
+	private static boolean useCache = false;
+	private static int pages = 10;
 
 	private int current;
 
@@ -243,6 +248,59 @@ public class GoogleMap2 implements ActionListener {
 		JFrame frame = new JFrame("Map");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		WindowUtilities.setMotifLookAndFeel();
+		
+		File cache = new File("cache.txt");
+		if (cache != null) {
+			//Custom button text
+			Object[] options = {"Load from cache",
+			                    "Download from Flickr",
+			                    "Cancel"};
+			int n = JOptionPane.showOptionDialog(frame,
+			    "How would you like to load images?",
+			    "Image Load Options",
+			    JOptionPane.YES_NO_CANCEL_OPTION,
+			    JOptionPane.QUESTION_MESSAGE,
+			    null,
+			    options,
+			    options[0]);
+			
+			if (n == 2) {
+				System.exit(0);
+			}
+			else if (n == 1) {
+				String s = (String)JOptionPane.showInputDialog(
+	                    frame,
+	                    "How many photos would you like? Each batch of 250 takes ~4 seconds",
+	                    "Number of Photos",
+	                    JOptionPane.PLAIN_MESSAGE,
+	                    null,
+	                    null,
+	                    "2500");
+				int p = 2500;
+				p = Integer.parseInt(s);
+				pages = p;
+			}
+			else {
+				useCache = true;
+			}
+		}
+		else {
+			String s = (String)JOptionPane.showInputDialog(
+                    frame,
+                    "How many photos would you like? Each batch of 250 takes ~4 seconds",
+                    "Number of Photos",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    null,
+                    "2500");
+			int p = 2500;
+			p = Integer.parseInt(s);
+			if (p == 0) {
+				System.exit(0);
+			}
+			pages = p;
+		}
+		boxMaker = new Boxfinder(useCache, pages);
 		frame.add(new GoogleMap2().getPanel());
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setSize(1300, 850);
