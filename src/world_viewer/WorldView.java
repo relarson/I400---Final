@@ -8,6 +8,7 @@ package world_viewer;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,9 +39,11 @@ public class WorldView implements ActionListener {
 	private JLabel pLabel;
 	private JLabel photoLabel;
 
-	private Icon disabledIcon = createImageIcon("Clear.png", "Node Disabled");
-	private Icon defaultIcon = createImageIcon("Blue1.png", "Node");
-	private Icon selectedIcon = createImageIcon("Green1.png", "Node Selected");
+	private int iconS = 16;
+	
+	private Icon disabledIcon = createImageIcon("Clear.png", "Node Disabled", iconS, iconS);
+	private Icon defaultIcon = createImageIcon("Blue1.png", "Node", iconS, iconS);
+	private Icon selectedIcon = createImageIcon("Green1.png", "Node Selected", iconS, iconS);
 
 	private GoogleMap gps = new GoogleMap();
 	private static Boxfinder boxMaker;
@@ -79,7 +82,7 @@ public class WorldView implements ActionListener {
 		pLabel = new JLabel(selectedPhotoImage);
 		pLabel.setIcon(createImageIcon(
 				"http://maps.google.com/maps/api/staticmap?center=0,0&zoom=1&size=400x400&scale=2&sensor=false",
-				"map"));
+				"map", 0, 0));
 
 		MapPanel.add(pLabel, BorderLayout.CENTER);
 		boxes = boxMaker.photoGrid;
@@ -92,7 +95,8 @@ public class WorldView implements ActionListener {
 					int y = gps.latitudeToY(n.latitude);
 					JButton button2 = new JButton();
 					button2.setLocation(x, y);
-					button2.setSize(128, 128);
+					System.out.println(defaultIcon.getIconWidth());
+					button2.setSize(iconS, iconS);
 					button2.setBackground(Color.WHITE);
 					button2.setActionCommand("node:" + i + ":" + j);
 					button2.addActionListener(this);
@@ -127,7 +131,7 @@ public class WorldView implements ActionListener {
 
 		photoLabel = new JLabel();
 		photoLabel.setLayout(new BorderLayout(10, 10));
-		photoLabel.setIcon(createImageIcon("iu.jpg", "Indiana University"));
+		photoLabel.setIcon(createImageIcon("iu.jpg", "Indiana University", 0, 0));
 		photoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		photoLabel.setVerticalAlignment(SwingConstants.CENTER);
 		photoLabel.setPreferredSize(new Dimension(PHOTO_WIDTH, MID_HEIGHT));
@@ -175,7 +179,7 @@ public class WorldView implements ActionListener {
 			// load up first photo
 			if (boxPhotos.size() >= 1) {
 				Photo p = boxPhotos.get(0);
-				photoLabel.setIcon(createImageIcon(p.imageURL, p.title));
+				photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 				current = 0;
 				prev.setEnabled(false);
 				if (boxPhotos.size() > 1) {
@@ -183,7 +187,7 @@ public class WorldView implements ActionListener {
 				} 
 			}
 			else {
-				photoLabel.setIcon(createImageIcon("Blue1.png", "No photos"));
+				photoLabel.setIcon(createImageIcon("Blue1.png", "No photos", 0, 0));
 				// System.out.println(photoLabel.getIcon().toString());
 			}
 			for (JButton jb : buttons) { 
@@ -198,7 +202,7 @@ public class WorldView implements ActionListener {
 			current++;
 			Photo p = boxPhotos.get(current);
 			//System.out.println(p.ID);
-			photoLabel.setIcon(createImageIcon(p.imageURL, p.title));
+			photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 			if (boxPhotos.size() == (current + 1)) {
 				next.setEnabled(false);
 			}
@@ -208,7 +212,7 @@ public class WorldView implements ActionListener {
 			current--;
 			Photo p = boxPhotos.get(current);
 			//System.out.println(p.ID);
-			photoLabel.setIcon(createImageIcon(p.imageURL, p.title));
+			photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 			if (current == 0) {
 				prev.setEnabled(false);
 			}
@@ -220,10 +224,16 @@ public class WorldView implements ActionListener {
 		MapPanel.getRootPane().repaint();
 	}
 
-	private ImageIcon createImageIcon(String path, String description) {
+	private ImageIcon createImageIcon(String path, String description, int width, int height) {
 		java.net.URL imgURL = this.getClass().getResource(path);
 		if (imgURL != null) {
-			return new ImageIcon(imgURL, description);
+			if (width <= 0)
+				width = -1;
+			if (height <= 0)
+				height = -1;
+			Image img = java.awt.Toolkit.getDefaultToolkit().createImage(imgURL).getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+			return new ImageIcon(img, description);
 		}
 		else {
 			try {
@@ -232,7 +242,13 @@ public class WorldView implements ActionListener {
 			catch (MalformedURLException MUE) {
 			}
 			if (imgURL != null) {
-				return new ImageIcon(imgURL, description);
+				if (width <= 0)
+					width = -1;
+				if (height <= 0)
+					height = -1;
+				Image img = java.awt.Toolkit.getDefaultToolkit().createImage(imgURL).getScaledInstance(width, height, Image.SCALE_SMOOTH);
+
+				return new ImageIcon(img, description);
 			}
 			else {
 				System.err.println("Couldn't find file: " + path);
