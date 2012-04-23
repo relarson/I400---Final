@@ -244,7 +244,7 @@ public class WorldView implements ActionListener {
 	private static void createAndShowGUI() {
 		JFrame frame = new JFrame("Map");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		WindowUtilities.setMotifLookAndFeel();
+		WindowUtilities.setNativeLookAndFeel();
 
 		File cache = new File("cache.txt");
 		if (cache.exists()) {
