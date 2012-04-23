@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-public class GoogleMap2 implements ActionListener {
+public class WorldView implements ActionListener {
 
 	private JPanel mainPanel = new JPanel();
 	private JPanel MapPanel = new JPanel();
@@ -58,7 +58,7 @@ public class GoogleMap2 implements ActionListener {
 
 	private int current;
 
-	public GoogleMap2() {
+	public WorldView() {
 
 		JPanel MapPanel = createMapPanel();
 		JPanel photoPanel = createPhotoPanel();
@@ -159,7 +159,7 @@ public class GoogleMap2 implements ActionListener {
 			int i = Integer.parseInt(parts[1]);
 			int j = Integer.parseInt(parts[2]);
 			Box b = boxes[i][j];
-			System.out.println("Button pressed. It was for box #: " + b.ID);
+			System.out.println("Button pressed. It was for box #: " + b.ID + ", which holds " + b.photos.size() + " photos");
 
 			// copy all the photos over so we can transverse back and forth
 			boxPhotos.clear();
@@ -278,7 +278,7 @@ public class GoogleMap2 implements ActionListener {
 			pages = p;
 		}
 		boxMaker = new Boxfinder(useCache, pages);
-		frame.add(new GoogleMap2().getPanel());
+		frame.add(new WorldView().getPanel());
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setSize(1300, 850);
 		frame.setLocationRelativeTo(null);
