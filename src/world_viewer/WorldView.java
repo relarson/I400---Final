@@ -95,7 +95,6 @@ public class WorldView implements ActionListener {
 					int y = gps.latitudeToY(n.latitude);
 					JButton button2 = new JButton();
 					button2.setLocation(x, y);
-					System.out.println(defaultIcon.getIconWidth());
 					button2.setSize(iconS, iconS);
 					button2.setBackground(Color.WHITE);
 					button2.setActionCommand("node:" + i + ":" + j);
