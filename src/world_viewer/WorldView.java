@@ -90,9 +90,10 @@ public class WorldView implements ActionListener {
 					MapNode n = boxes[i][j].point;
 					int x = gps.longitudeToX(n.longitude);
 					int y = gps.latitudeToY(n.latitude);
-					JButton button2 = new JButton(defaultIcon);
+					JButton button2 = new JButton();
 					button2.setLocation(x, y);
-					button2.setSize(20, 20);
+					button2.setSize(128, 128);
+					button2.setBackground(Color.WHITE);
 					button2.setActionCommand("node:" + i + ":" + j);
 					button2.addActionListener(this);
 					button2.setDisabledIcon(disabledIcon);
@@ -179,16 +180,19 @@ public class WorldView implements ActionListener {
 				prev.setEnabled(false);
 				if (boxPhotos.size() > 1) {
 					next.setEnabled(true);
-				}
-				/*
-				 * use this for loop if you need to modify every button for
-				 * (JButton jb : buttons) { jb.setBackground(Color.CYAN); } //
-				 */
+				} 
 			}
 			else {
 				photoLabel.setIcon(createImageIcon("Blue1.png", "No photos"));
 				// System.out.println(photoLabel.getIcon().toString());
 			}
+			for (JButton jb : buttons) { 
+				if (jb != null) {
+					jb.setIcon(defaultIcon);
+				}	 
+			}
+			JButton jB = ((JButton) e.getSource());
+			jB.setIcon(selectedIcon);
 		}
 		else if (command.equals("next")) {
 			current++;
