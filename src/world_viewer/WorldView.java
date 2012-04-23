@@ -93,26 +93,26 @@ public class WorldView implements ActionListener {
 					MapNode n = boxes[i][j].point;
 					int x = gps.longitudeToX(n.longitude);
 					int y = gps.latitudeToY(n.latitude);
-					JButton button2 = new JButton();
-					button2.setLocation(x, y);
-					button2.setSize(iconS, iconS);
-					button2.setBackground(Color.WHITE);
-					button2.setActionCommand("node:" + i + ":" + j);
-					button2.addActionListener(this);
-					button2.setDisabledIcon(disabledIcon);
-					button2.setIcon(defaultIcon);
-					button2.setSelectedIcon(selectedIcon);
+					JButton button = new JButton();
+					button.setLocation(x, y);
+					button.setSize(iconS, iconS);
+					button.setOpaque(false);
+					button.setActionCommand("node:" + i + ":" + j);
+					button.addActionListener(this);
+					button.setDisabledIcon(disabledIcon);
+					button.setIcon(defaultIcon);
+					button.setSelectedIcon(selectedIcon);
 					if (boxes[i][j].photos.size() > 0) {
-						button2.setEnabled(true);
+						button.setEnabled(true);
 					}
 					else {
-						button2.setEnabled(false);
+						button.setEnabled(false);
 					}
 
-					buttons[i + 36 * j] = button2;
+					buttons[i + 36 * j] = button;
 					// System.out.println(button2.getText() + "  ,X = " +
 					// button2.getX() + "  ,Y = " + button2.getY());
-					pLabel.add(button2);
+					pLabel.add(button);
 				}
 			}
 		}
@@ -163,7 +163,7 @@ public class WorldView implements ActionListener {
 			int i = Integer.parseInt(parts[1]);
 			int j = Integer.parseInt(parts[2]);
 			Box b = boxes[i][j];
-			System.out.println("Button pressed. It was for box #: " + b.ID + ", which holds " + b.photos.size() + " photos");
+			System.out.println(b.toString());
 
 			// copy all the photos over so we can transverse back and forth
 			boxPhotos.clear();
@@ -178,6 +178,7 @@ public class WorldView implements ActionListener {
 			// load up first photo
 			if (boxPhotos.size() >= 1) {
 				Photo p = boxPhotos.get(0);
+				System.out.println(p.toString());
 				photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 				current = 0;
 				prev.setEnabled(false);

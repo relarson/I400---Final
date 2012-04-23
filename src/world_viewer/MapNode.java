@@ -17,7 +17,7 @@ public class MapNode {
 	}
 	
 	public String toString() {
-		return " Lat: " + latitude + "Long: " + longitude;
+		return "Lat: " + latitude + ", Long: " + longitude;
 	}
 	
 	public boolean equals(MapNode other) {

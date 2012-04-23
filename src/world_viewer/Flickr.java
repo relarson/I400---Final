@@ -40,7 +40,7 @@ public class Flickr {
 	public void cache(String tags, int maxPages) throws IOException, XPathExpressionException,
 			DOMException {
 		XPathReader xpath = null;
-		String output = "";
+		
 
 		int page = 1, pages = 1;
 
@@ -48,9 +48,11 @@ public class Flickr {
 		String flickResults = flickrSearch(tags, 1);
 		xpath = new XPathReader(flickResults);
 		pages = Integer.parseInt((String) xpath.read("//photos/@pages", XPathConstants.STRING));
+		
 		if (pages > maxPages) {
 			pages = maxPages;
 		}
+		String output = "" + pages + "\n";
 		// System.out.println(flickResults);
 
 		while (page <= pages) {
@@ -86,10 +88,12 @@ public class Flickr {
 		File cache = new File("cache.txt");
 		FileReader cacheReader = new FileReader(cache);
 		BufferedReader bufferedCache = new BufferedReader(cacheReader);
+		String pages = bufferedCache.readLine();
+		int numPages = Integer.parseInt(pages);
 		String page = bufferedCache.readLine();
 		int j = 1;
 		while (page != null) {
-			// System.out.println("Page: " + j);
+			System.out.println("Page: " + j + " of " + numPages);
 			XPathReader xpath = new XPathReader(page);
 			NodeList titles = (NodeList) xpath.read("//photo/@title", XPathConstants.NODESET);
 			NodeList lats = (NodeList) xpath.read("//photo/@latitude", XPathConstants.NODESET);

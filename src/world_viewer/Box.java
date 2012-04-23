@@ -58,6 +58,6 @@ public class Box {
 	}
 
 	public String toString() {
-		return "Box #: " + ID + "\n" + point.toString();
+		return "Box #: " + ID + " holds " + photos.size() + " photos.\n" + point.toString();
 	}
 }
