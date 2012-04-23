@@ -19,11 +19,11 @@ public class GoogleMap {
 	public GoogleMap() {
 		this.centerLat = 0;
 		this.centerLon = 0;
-		this.width = 800;
+		this.width = 1000;
 		this.height = 800;
 		this.zoom = 1;
 
-		double realWidth = 400.00 * Math.pow(2, zoom);
+		double realWidth = 500.00 * Math.pow(2, zoom);
 
 		pixelsPerDegree = realWidth / 360.00;
 		pixelsPerRadian = realWidth / (2.00 * Math.PI);

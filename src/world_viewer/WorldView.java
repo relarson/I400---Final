@@ -49,12 +49,11 @@ public class WorldView implements ActionListener {
 	private static Boxfinder boxMaker;
 	private Box[][] boxes = new Box[36][36];
 	private ArrayList<Photo> boxPhotos = new ArrayList<Photo>();
-	// TODO do I need this?
 	private JButton[] buttons = new JButton[36 * 36];
 	private ImageIcon selectedPhotoImage;
 	private final int MID_HEIGHT = 800;
 	private final int PHOTO_WIDTH = 500;
-	private final int MAP_WIDTH = 800;
+	private final int MAP_WIDTH = 1000;
 
 	private static boolean useCache = false;
 	private static int pages = 10;
@@ -81,7 +80,7 @@ public class WorldView implements ActionListener {
 		MapPanel.setPreferredSize(new Dimension(MAP_WIDTH, MID_HEIGHT));
 		pLabel = new JLabel(selectedPhotoImage);
 		pLabel.setIcon(createImageIcon(
-				"http://maps.google.com/maps/api/staticmap?center=0,0&zoom=1&size=400x400&scale=2&sensor=false",
+				"http://maps.google.com/maps/api/staticmap?center=0,0&zoom=1&size=500x400&scale=2&sensor=false",
 				"map", 0, 0));
 
 		MapPanel.add(pLabel, BorderLayout.CENTER);
@@ -304,7 +303,7 @@ public class WorldView implements ActionListener {
 		boxMaker = new Boxfinder(useCache, pages);
 		frame.add(new WorldView().getPanel());
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setSize(1300, 850);
+		frame.setSize(1500, 850);
 		frame.setLocationRelativeTo(null);
 		frame.pack();
 		if (screen.getHeight() <= 800)
