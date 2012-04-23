@@ -5,6 +5,7 @@ package world_viewer;
  * @class INFO-I 400
  */
 public class Photo {
+	public int ID;
 	public String title = "";
 	public String imageURL;
 
@@ -17,7 +18,8 @@ public class Photo {
 	 * @param latitude - Latitude coordinate of the Photo
 	 * @param longitude - Longitude coordinate of the Photo
 	 */
-	public Photo(String title, String imageURL, double latitude, double longitude) {
+	public Photo(int ID, String title, String imageURL, double latitude, double longitude) {
+		this.ID = ID;
 		this.title = title;
 		this.imageURL = imageURL;
 		this.latitude = latitude;
@@ -30,7 +32,7 @@ public class Photo {
 
 	@Override
 	public String toString() {
-		return "Lat: " + latitude + "\n Long: " + longitude + "\n URL: " + imageURL;
+		return "   ID: " + ID + "\n  Lat: " + latitude + "\n Long: " + longitude + "\n URL: " + imageURL;
 	}
 
 }

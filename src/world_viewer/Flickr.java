@@ -88,9 +88,9 @@ public class Flickr {
 		FileReader cacheReader = new FileReader(cache);
 		BufferedReader bufferedCache = new BufferedReader(cacheReader);
 		String page = bufferedCache.readLine();
-		// int j = 1;
+		int j = 1;
 		while (page != null) {
-			// System.out.println("Page: " + (j++));
+			// System.out.println("Page: " + j);
 			XPathReader xpath = new XPathReader(page);
 			NodeList titles = (NodeList) xpath.read("//photo/@title", XPathConstants.NODESET);
 			NodeList lats = (NodeList) xpath.read("//photo/@latitude", XPathConstants.NODESET);
@@ -102,8 +102,9 @@ public class Flickr {
 				la = Double.parseDouble(lats.item(i).getNodeValue());
 				lg = Double.parseDouble(longs.item(i).getNodeValue());
 
-				al.add(new Photo(titles.item(i).getNodeValue(), urls.item(i).getNodeValue(), la, lg));
+				al.add(new Photo((j - 1)*250 + i, titles.item(i).getNodeValue(), urls.item(i).getNodeValue(), la, lg));
 			}
+			j++;
 			page = bufferedCache.readLine();
 		}
 

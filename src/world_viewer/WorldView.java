@@ -192,8 +192,9 @@ public class WorldView implements ActionListener {
 		}
 		else if (command.equals("next")) {
 			current++;
-			photoLabel.setIcon(createImageIcon(boxPhotos.get(current).imageURL,
-					boxPhotos.get(current).title));
+			Photo p = boxPhotos.get(current);
+			//System.out.println(p.ID);
+			photoLabel.setIcon(createImageIcon(p.imageURL, p.title));
 			if (boxPhotos.size() == (current + 1)) {
 				next.setEnabled(false);
 			}
@@ -201,13 +202,15 @@ public class WorldView implements ActionListener {
 		}
 		else if (command.equals("previous")) {
 			current--;
-			photoLabel.setIcon(createImageIcon(boxPhotos.get(current).imageURL,
-					boxPhotos.get(current).title));
+			Photo p = boxPhotos.get(current);
+			//System.out.println(p.ID);
+			photoLabel.setIcon(createImageIcon(p.imageURL, p.title));
 			if (current == 0) {
 				prev.setEnabled(false);
 			}
 			next.setEnabled(true);
 		}
+		photoLabel.repaint();
 		photoPanel.getRootPane().revalidate();
 		photoPanel.getRootPane().repaint();
 		MapPanel.getRootPane().repaint();
