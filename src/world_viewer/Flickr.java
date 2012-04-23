@@ -60,12 +60,11 @@ public class Flickr {
 					+ " milliseconds.");
 			page++;
 			if (page <= pages) {
-				xpath = new XPathReader(flickrSearch(tags, page));
+				flickResults = flickrSearch(tags, page);
+				long after = System.currentTimeMillis();
+				System.out.println("Page # " + page + " took " + (after - curr)
+						+ " milliseconds to request and retrieve.");
 			}
-			long after = System.currentTimeMillis();
-			System.out.println("Page # " + page + " took " + (after - curr)
-					+ " milliseconds to request and retrieve.");
-
 		}
 		long end = System.currentTimeMillis();
 		System.out.println(pages + " pages collected in " + (end - start) + " milliseconds.");
