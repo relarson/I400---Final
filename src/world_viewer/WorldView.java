@@ -130,7 +130,7 @@ public class WorldView implements ActionListener {
 
 		photoLabel = new JLabel();
 		photoLabel.setLayout(new BorderLayout(10, 10));
-		photoLabel.setIcon(createImageIcon("iu.jpg", "Indiana University", 0, 0));
+		photoLabel.setIcon(createImageIcon("Blue1.png", "Blue Orb", 0, 0));
 		photoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		photoLabel.setVerticalAlignment(SwingConstants.CENTER);
 		photoLabel.setPreferredSize(new Dimension(PHOTO_WIDTH, MID_HEIGHT));
