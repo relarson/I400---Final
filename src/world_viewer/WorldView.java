@@ -38,6 +38,7 @@ public class WorldView implements ActionListener {
 	private JButton prev = new JButton("<-- Previous Photo");
 	private JLabel pLabel;
 	private JLabel photoLabel;
+	private JLabel countLabel;
 
 	private int iconS = 16;
 	
@@ -133,6 +134,12 @@ public class WorldView implements ActionListener {
 		photoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		photoLabel.setVerticalAlignment(SwingConstants.CENTER);
 		photoLabel.setPreferredSize(new Dimension(PHOTO_WIDTH, MID_HEIGHT));
+		
+		countLabel = new JLabel();
+		countLabel.setLayout(new BorderLayout(10, 10));
+		countLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		countLabel.setVerticalAlignment(SwingConstants.CENTER);
+		countLabel.setText("Photo 0/0");
 
 		prev.setActionCommand("previous");
 		next.setActionCommand("next");
@@ -148,6 +155,7 @@ public class WorldView implements ActionListener {
 
 		buttonPanel.add(prev);
 		buttonPanel.add(next);
+		buttonPanel.add(countLabel);
 
 		photoPanel.add(photoLabel, BorderLayout.CENTER);
 		photoPanel.add(buttonPanel, BorderLayout.NORTH);
@@ -175,6 +183,7 @@ public class WorldView implements ActionListener {
 			for (Photo p : boxPhotos) {
 				b.photos.add(p);
 			}
+			countLabel.setText("Photo 1/" + boxPhotos.size());
 			// load up first photo
 			if (boxPhotos.size() >= 1) {
 				Photo p = boxPhotos.get(0);
@@ -185,7 +194,10 @@ public class WorldView implements ActionListener {
 				prev.setEnabled(false);
 				if (boxPhotos.size() > 1) {
 					next.setEnabled(true);
-				} 
+				}
+				else {
+					next.setEnabled(false);
+				}
 			}
 			else {
 				photoLabel.setIcon(createImageIcon("Blue1.png", "No photos", 0, 0));
@@ -202,6 +214,7 @@ public class WorldView implements ActionListener {
 			current++;
 			Photo p = boxPhotos.get(current);
 			//System.out.println(p.ID);
+			countLabel.setText("Photo " + (current+1) + "/" + boxPhotos.size());
 			photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 			if (boxPhotos.size() == (current + 1)) {
 				next.setEnabled(false);
@@ -212,6 +225,7 @@ public class WorldView implements ActionListener {
 			current--;
 			Photo p = boxPhotos.get(current);
 			//System.out.println(p.ID);
+			countLabel.setText("Photo " + (current+1) + "/" + boxPhotos.size());
 			photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 			if (current == 0) {
 				prev.setEnabled(false);
@@ -246,9 +260,9 @@ public class WorldView implements ActionListener {
 					width = -1;
 				if (height <= 0)
 					height = -1;
-				Image img = java.awt.Toolkit.getDefaultToolkit().createImage(imgURL).getScaledInstance(width, height, Image.SCALE_SMOOTH);
+				//Image img = java.awt.Toolkit.getDefaultToolkit().createImage(imgURL).getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
-				return new ImageIcon(img, description);
+				return new ImageIcon(imgURL, description);
 			}
 			else {
 				System.err.println("Couldn't find file: " + path);
