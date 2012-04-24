@@ -14,9 +14,12 @@ public class Photo {
 	/**
 	 * Construct a photo object
 	 * 
-	 * @param imageURL - The photo's URL
-	 * @param latitude - Latitude coordinate of the Photo
-	 * @param longitude - Longitude coordinate of the Photo
+	 * @param imageURL
+	 *            - The photo's URL
+	 * @param latitude
+	 *            - Latitude coordinate of the Photo
+	 * @param longitude
+	 *            - Longitude coordinate of the Photo
 	 */
 	public Photo(int ID, String title, String imageURL, double latitude, double longitude) {
 		this.ID = ID;
@@ -32,7 +35,8 @@ public class Photo {
 
 	@Override
 	public String toString() {
-		return "  ID: " + ID + "\n Lat: " + latitude + ", Long: " + longitude + "\n URL: " + imageURL;
+		return "  ID: " + ID + "\n Lat: " + latitude + ", Long: " + longitude + "\n URL: "
+				+ imageURL;
 	}
 
 }

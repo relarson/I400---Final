@@ -40,15 +40,14 @@ public class Flickr {
 	public void cache(String tags, int maxPages) throws IOException, XPathExpressionException,
 			DOMException {
 		XPathReader xpath = null;
-		
 
 		int page = 1, pages = 1;
 
-		long start = System.currentTimeMillis();
+		// long start = System.currentTimeMillis();
 		String flickResults = flickrSearch(tags, 1);
 		xpath = new XPathReader(flickResults);
 		pages = Integer.parseInt((String) xpath.read("//photos/@pages", XPathConstants.STRING));
-		
+
 		if (pages > maxPages) {
 			pages = maxPages;
 		}
@@ -57,19 +56,22 @@ public class Flickr {
 
 		while (page <= pages) {
 			output = output + flickResults + "\n";
-			long curr = System.currentTimeMillis();
-			System.out.println(page + " / " + pages + " collected. Elapsed time: " + (curr - start)
-					+ " milliseconds.");
+			// long curr = System.currentTimeMillis();
+			// System.out.println(page + " / " + pages +
+			// " collected. Elapsed time: " + (curr - start)
+			// + " milliseconds.");
 			page++;
 			if (page <= pages) {
 				flickResults = flickrSearch(tags, page);
-				long after = System.currentTimeMillis();
-				System.out.println("Page # " + page + " took " + (after - curr)
-						+ " milliseconds to request and retrieve.");
+				// long after = System.currentTimeMillis();
+				// System.out.println("Page # " + page + " took " + (after -
+				// curr)
+				// + " milliseconds to request and retrieve.");
 			}
 		}
-		long end = System.currentTimeMillis();
-		System.out.println(pages + " pages collected in " + (end - start) + " milliseconds.");
+		// long end = System.currentTimeMillis();
+		// System.out.println(pages + " pages collected in " + (end - start) +
+		// " milliseconds.");
 
 		File cache = new File("cache.txt");
 		if (cache != null) {
@@ -88,12 +90,12 @@ public class Flickr {
 		File cache = new File("cache.txt");
 		FileReader cacheReader = new FileReader(cache);
 		BufferedReader bufferedCache = new BufferedReader(cacheReader);
-		String pages = bufferedCache.readLine();
-		int numPages = Integer.parseInt(pages);
+		bufferedCache.readLine();
+		// int numPages = Integer.parseInt(pages);
 		String page = bufferedCache.readLine();
 		int j = 1;
 		while (page != null) {
-			System.out.println("Page: " + j + " of " + numPages);
+			// System.out.println("Page: " + j + " of " + numPages);
 			XPathReader xpath = new XPathReader(page);
 			NodeList titles = (NodeList) xpath.read("//photo/@title", XPathConstants.NODESET);
 			NodeList lats = (NodeList) xpath.read("//photo/@latitude", XPathConstants.NODESET);
@@ -105,14 +107,15 @@ public class Flickr {
 				la = Double.parseDouble(lats.item(i).getNodeValue());
 				lg = Double.parseDouble(longs.item(i).getNodeValue());
 
-				al.add(new Photo((j - 1)*250 + i, titles.item(i).getNodeValue(), urls.item(i).getNodeValue(), la, lg));
+				al.add(new Photo((j - 1) * 250 + i, titles.item(i).getNodeValue(), urls.item(i)
+						.getNodeValue(), la, lg));
 			}
 			j++;
 			page = bufferedCache.readLine();
 		}
 
 		bufferedCache.close();
-		System.out.println(al.size());
+		// System.out.println(al.size());
 		return al;
 	}
 

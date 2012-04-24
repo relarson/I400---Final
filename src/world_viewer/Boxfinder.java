@@ -54,7 +54,7 @@ public class Boxfinder {
 	public void getPhotos(boolean useCache, int pages) throws XPathExpressionException,
 			DOMException, IOException {
 
-		Long s = System.currentTimeMillis();
+		// Long s = System.currentTimeMillis();
 		if (useCache) {
 			photos = flick.uncache();
 		}
@@ -63,11 +63,12 @@ public class Boxfinder {
 			photos = flick.uncache();
 		}
 
-		Long p = System.currentTimeMillis();
+		// Long p = System.currentTimeMillis();
 		assignPhotosToBoxes();
-		Long e = System.currentTimeMillis();
-		System.out.println("Photos: " + (p - s) + "\nAll assignments: " + (e - p) + "\nTotal: "
-				+ (e - s));
+		// Long e = System.currentTimeMillis();
+		// System.out.println("Photos: " + (p - s) + "\nAll assignments: " + (e
+		// - p) + "\nTotal: "
+		// + (e - s));
 	}
 
 	public void assignPhotosToBoxes() {

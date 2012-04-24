@@ -41,7 +41,7 @@ public class WorldView implements ActionListener {
 	private JLabel countLabel;
 
 	private int iconS = 16;
-	
+
 	private Icon disabledIcon = createImageIcon("Clear.png", "Node Disabled", iconS, iconS);
 	private Icon defaultIcon = createImageIcon("Blue1.png", "Node", iconS, iconS);
 	private Icon selectedIcon = createImageIcon("Green1.png", "Node Selected", iconS, iconS);
@@ -134,7 +134,7 @@ public class WorldView implements ActionListener {
 		photoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		photoLabel.setVerticalAlignment(SwingConstants.CENTER);
 		photoLabel.setPreferredSize(new Dimension(PHOTO_WIDTH, MID_HEIGHT));
-		
+
 		countLabel = new JLabel();
 		countLabel.setLayout(new BorderLayout(10, 10));
 		countLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -171,7 +171,7 @@ public class WorldView implements ActionListener {
 			int i = Integer.parseInt(parts[1]);
 			int j = Integer.parseInt(parts[2]);
 			Box b = boxes[i][j];
-			System.out.println(b.toString());
+			// System.out.println(b.toString());
 
 			// copy all the photos over so we can transverse back and forth
 			boxPhotos.clear();
@@ -187,8 +187,8 @@ public class WorldView implements ActionListener {
 			// load up first photo
 			if (boxPhotos.size() >= 1) {
 				Photo p = boxPhotos.get(0);
-				System.out.println(p.toString());
-				System.out.println("(" + jB.getX() + ", " + jB.getY() + ")");
+				// System.out.println(p.toString());
+				// System.out.println("(" + jB.getX() + ", " + jB.getY() + ")");
 				photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 				current = 0;
 				prev.setEnabled(false);
@@ -203,18 +203,18 @@ public class WorldView implements ActionListener {
 				photoLabel.setIcon(createImageIcon("Blue1.png", "No photos", 0, 0));
 				// System.out.println(photoLabel.getIcon().toString());
 			}
-			for (JButton jb : buttons) { 
+			for (JButton jb : buttons) {
 				if (jb != null) {
 					jb.setIcon(defaultIcon);
-				}	 
+				}
 			}
 			jB.setIcon(selectedIcon);
 		}
 		else if (command.equals("next")) {
 			current++;
 			Photo p = boxPhotos.get(current);
-			//System.out.println(p.ID);
-			countLabel.setText("Photo " + (current+1) + "/" + boxPhotos.size());
+			// System.out.println(p.ID);
+			countLabel.setText("Photo " + (current + 1) + "/" + boxPhotos.size());
 			photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 			if (boxPhotos.size() == (current + 1)) {
 				next.setEnabled(false);
@@ -224,8 +224,8 @@ public class WorldView implements ActionListener {
 		else if (command.equals("previous")) {
 			current--;
 			Photo p = boxPhotos.get(current);
-			//System.out.println(p.ID);
-			countLabel.setText("Photo " + (current+1) + "/" + boxPhotos.size());
+			// System.out.println(p.ID);
+			countLabel.setText("Photo " + (current + 1) + "/" + boxPhotos.size());
 			photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 			if (current == 0) {
 				prev.setEnabled(false);
@@ -245,7 +245,8 @@ public class WorldView implements ActionListener {
 				width = -1;
 			if (height <= 0)
 				height = -1;
-			Image img = java.awt.Toolkit.getDefaultToolkit().createImage(imgURL).getScaledInstance(width, height, Image.SCALE_SMOOTH);
+			Image img = java.awt.Toolkit.getDefaultToolkit().createImage(imgURL)
+					.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
 			return new ImageIcon(img, description);
 		}
@@ -260,7 +261,9 @@ public class WorldView implements ActionListener {
 					width = -1;
 				if (height <= 0)
 					height = -1;
-				//Image img = java.awt.Toolkit.getDefaultToolkit().createImage(imgURL).getScaledInstance(width, height, Image.SCALE_SMOOTH);
+				// Image img =
+				// java.awt.Toolkit.getDefaultToolkit().createImage(imgURL).getScaledInstance(width,
+				// height, Image.SCALE_SMOOTH);
 
 				return new ImageIcon(imgURL, description);
 			}
