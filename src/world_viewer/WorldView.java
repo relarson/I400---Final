@@ -286,6 +286,7 @@ public class WorldView implements ActionListener {
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		frame.setLocationRelativeTo(null);
 		frame.pack();
+		frame.setResizable(false);
 		if (screen.getWidth() <= 1000) {
 			scale = 1;
 		}
@@ -296,9 +297,9 @@ public class WorldView implements ActionListener {
 			scale = 2;
 		}
 		gps = new GoogleMap(scale);
-		frame.setSize(500+ ((int) (scale*500)), 50 + ((int) (scale*400)));
 		MID_HEIGHT = (int) (scale*400);
 		MAP_WIDTH = (int) (scale*500);
+		frame.setSize(500+ MAP_WIDTH, 50 + MID_HEIGHT);
 		File cache = new File("cache.txt");
 		if (cache.exists()) {
 			// Custom button text
