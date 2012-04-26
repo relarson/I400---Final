@@ -52,9 +52,9 @@ public class WorldView implements ActionListener {
 	private ArrayList<Photo> boxPhotos = new ArrayList<Photo>();
 	private JButton[] buttons = new JButton[36 * 36];
 	private ImageIcon selectedPhotoImage;
-	private final int MID_HEIGHT = 800;
+	private static int MID_HEIGHT = 400;
 	private final int PHOTO_WIDTH = 500;
-	private final int MAP_WIDTH = 1000;
+	private static int MAP_WIDTH = 500;
 
 	private static boolean useCache = false;
 	private static int pages = 10;
@@ -188,7 +188,7 @@ public class WorldView implements ActionListener {
 			// load up first photo
 			if (boxPhotos.size() >= 1) {
 				Photo p = boxPhotos.get(0);
-				// System.out.println(p.toString());
+				//System.out.println(p.toString());
 				// System.out.println("(" + jB.getX() + ", " + jB.getY() + ")");
 				photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 				current = 0;
@@ -284,7 +284,6 @@ public class WorldView implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		WindowUtilities.setNativeLookAndFeel();
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setSize(1500, 850);
 		frame.setLocationRelativeTo(null);
 		frame.pack();
 		if (screen.getWidth() <= 1000) {
@@ -297,7 +296,9 @@ public class WorldView implements ActionListener {
 			scale = 2;
 		}
 		gps = new GoogleMap(scale);
-		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		frame.setSize(500+ ((int) (scale*500)), 50 + ((int) (scale*400)));
+		MID_HEIGHT = (int) (scale*400);
+		MAP_WIDTH = (int) (scale*500);
 		File cache = new File("cache.txt");
 		if (cache.exists()) {
 			// Custom button text
