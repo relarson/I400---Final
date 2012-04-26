@@ -68,8 +68,8 @@ public class WorldView implements ActionListener {
 		JPanel photoPanel = createPhotoPanel();
 
 		mainPanel.setBackground(Color.BLACK);
-		mainPanel.setLayout(new BorderLayout(10, 10));
-		mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		mainPanel.setLayout(new BorderLayout(5, 5));
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 		mainPanel.add(MapPanel, BorderLayout.WEST);
 		mainPanel.add(photoPanel, BorderLayout.EAST);
 	}
@@ -127,17 +127,17 @@ public class WorldView implements ActionListener {
 	private JPanel createPhotoPanel() {
 		photoPanel.setBackground(Color.WHITE);
 		photoPanel.setPreferredSize(new Dimension(PHOTO_WIDTH, MID_HEIGHT));
-		photoPanel.setLayout(new BorderLayout(10, 10));
+		photoPanel.setLayout(new BorderLayout(5, 5));
 
 		photoLabel = new JLabel();
-		photoLabel.setLayout(new BorderLayout(10, 10));
+		photoLabel.setLayout(new BorderLayout(5, 5));
 		photoLabel.setIcon(createImageIcon("Blue1.png", "Blue Orb", 0, 0));
 		photoLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		photoLabel.setVerticalAlignment(SwingConstants.CENTER);
 		photoLabel.setPreferredSize(new Dimension(PHOTO_WIDTH, MID_HEIGHT));
 
 		countLabel = new JLabel();
-		countLabel.setLayout(new BorderLayout(10, 10));
+		countLabel.setLayout(new BorderLayout(5, 5));
 		countLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		countLabel.setVerticalAlignment(SwingConstants.CENTER);
 		countLabel.setText("Photo 0/0");
@@ -284,7 +284,7 @@ public class WorldView implements ActionListener {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		WindowUtilities.setNativeLookAndFeel();
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setLocationRelativeTo(null);
+		//frame.setLocationRelativeTo(null);
 		frame.pack();
 		frame.setResizable(false);
 		if (screen.getWidth() <= 1000) {
