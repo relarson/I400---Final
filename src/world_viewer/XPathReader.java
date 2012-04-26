@@ -37,7 +37,7 @@ public class XPathReader {
 			ex.printStackTrace();
 		}
 	}
-
+	
 	public Object read(String expression, QName returnType) {
 		try {
 			XPathExpression xPathExpression = xPath.compile(expression);

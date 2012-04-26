@@ -29,11 +29,25 @@ public class Photo {
 		this.longitude = longitude;
 	}
 
+	/**
+	 * Checks equality of photos.
+	 * 
+	 * @param other
+	 * 	-Photo the user wishes to compare to
+	 * 
+	 * @return boolean
+	 */
 	public boolean equals(Photo other) {
 		return this.imageURL.equals(other.imageURL);
 	}
 
 	@Override
+	/**
+	 * Prints out string representation of the photo's properties.
+	 * 
+	 * @return String
+	 * 	-Useful information about the photo's properties.
+	 */
 	public String toString() {
 		return "  ID: " + ID + "\n Lat: " + latitude + ", Long: " + longitude + "\n URL: "
 				+ imageURL;

@@ -1,7 +1,8 @@
 package world_viewer;
 
 /**
- * @author Ross Larson and Brett Poirier
+ * @author Ross Larson 
+ * @author Brett Poirier
  * @class INFO-I 400
  */
 
@@ -61,7 +62,10 @@ public class WorldView implements ActionListener {
 	private static double scale = 1;
 
 	private int current;
-
+	
+	/**
+	 * Constructs a WorldView object
+	 */
 	public WorldView() {
 
 		JPanel MapPanel = createMapPanel();
@@ -73,7 +77,13 @@ public class WorldView implements ActionListener {
 		mainPanel.add(MapPanel, BorderLayout.WEST);
 		mainPanel.add(photoPanel, BorderLayout.EAST);
 	}
-
+	
+	/**
+	 * Creates the Map Panel for the WorldView Application
+	 * 
+	 * @return JPanel
+	 * 
+	 */
 	private JPanel createMapPanel() {
 
 		MapPanel.setOpaque(false);
@@ -123,7 +133,11 @@ public class WorldView implements ActionListener {
 		return MapPanel;
 	}
 
-	// /WE WANT photos TO APPEAR
+	/**
+	 * Creates a PhotoPanel object
+	 * 
+	 * @return JPanel
+	 */
 	private JPanel createPhotoPanel() {
 		photoPanel.setBackground(Color.WHITE);
 		photoPanel.setPreferredSize(new Dimension(PHOTO_WIDTH, MID_HEIGHT));
@@ -164,6 +178,11 @@ public class WorldView implements ActionListener {
 		return photoPanel;
 	}
 
+	/**
+	 * Handles button press input for next and previous buttons.
+	 * 
+	 * @param ActionEvent
+	 */
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 		if (command.substring(0, 4).equals("node")) {
@@ -239,6 +258,16 @@ public class WorldView implements ActionListener {
 		MapPanel.getRootPane().repaint();
 	}
 
+	/**
+	 * Creates ImageIcon object.
+	 * 
+	 * @param path
+	 * @param description
+	 * @param width
+	 * @param height
+	 * 
+	 * @return ImageIcon
+	 */
 	private ImageIcon createImageIcon(String path, String description, int width, int height) {
 		java.net.URL imgURL = this.getClass().getResource(path);
 		if (imgURL != null) {
@@ -275,10 +304,19 @@ public class WorldView implements ActionListener {
 		}
 	}
 
+	/**
+	 * Gets the main panel for WorldView.
+	 * 
+	 * @return JPanel
+	 * 	-main panel for WorldView
+	 */
 	public JPanel getPanel() {
 		return mainPanel;
 	}
-
+	
+	/**
+	 * Creates and displays the GUI for WorldView 
+	 */
 	private static void createAndShowGUI() {
 		JFrame frame = new JFrame("Map");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -287,7 +325,7 @@ public class WorldView implements ActionListener {
 		//frame.setLocationRelativeTo(null);
 		frame.pack();
 		frame.setResizable(false);
-		if (screen.getWidth() <= 1000) {
+		if (screen.getWidth() <= 1270) {
 			scale = 1;
 		}
 		else if (screen.getWidth() < 1500) {

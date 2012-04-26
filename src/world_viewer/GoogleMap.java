@@ -15,7 +15,12 @@ public class GoogleMap {
 	private double pixelsPerDegree;
 	private double pixelsPerRadian;
 
-	/* Brett's comment */
+	/**
+	 * Creates GoogleMap object.
+	 * 
+	 * @param scale
+	 * 	-Scaling factor for adjustment to different screen resolutions.
+	 */
 	public GoogleMap(double scale) {
 		this.centerLat = 0;
 		this.centerLon = 0;
@@ -29,14 +34,37 @@ public class GoogleMap {
 		pixelsPerRadian = realWidth / (2.00 * Math.PI);
 	}
 
+	/**
+	 * Takes the arc-tangent of a given double.
+	 * 
+	 * @param rad
+	 * 
+	 * @return double
+	 */
 	private double atanh(double rad) {
 		return Math.log((1 + rad) / (1 - rad)) / 2;
 	}
 
+	/**
+	 * Converts a longitude coordinate to an integer x to be plotted on WorldView GUI.
+	 * 
+	 * @param lon
+	 * 	-longitude coordinate
+	 * 
+	 * @return int
+	 */
 	public int longitudeToX(double lon) {
 		return (int) Math.floor((lon - centerLon) * pixelsPerDegree) + (width / 2);
 	}
 
+	/**
+	 * Converts a latitude coordinate to an integer y to be plotted on WorldView GUI.
+	 * 
+	 * @param lat
+	 * 	-latitude coordinate
+	 * 
+	 * @return int
+	 */
 	public int latitudeToY(double lat) {
 		double centerY = atanh(Math.sin(Math.toRadians(centerLat))) * pixelsPerRadian;
 		double localAtanh = atanh(Math.sin(Math.toRadians(lat)));

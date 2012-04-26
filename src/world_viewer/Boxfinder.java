@@ -19,6 +19,14 @@ public class Boxfinder {
 
 	public Box[][] photoGrid = new Box[36][36];
 
+	/**
+	 * Creates Boxfinder object.
+	 * 
+	 * @param useCache
+	 * 			-boolean value that indicates whether or not to use cache.
+	 * @param pages
+	 * 			-integer value indicating the number of pages cached.
+	 */
 	public Boxfinder(boolean useCache, int pages) {
 		createBoxes();
 		try {
@@ -35,6 +43,9 @@ public class Boxfinder {
 		}
 	}
 
+	/**
+	 * Creates boxes for photoGrid.
+	 */
 	public void createBoxes() {
 		for (int i = 0; i < 36; i++) {
 			for (int j = 0; j < 36; j++) {
@@ -43,14 +54,40 @@ public class Boxfinder {
 		}
 	}
 
+	/**
+	 * Gets the latitude of Box.
+	 * 
+	 * @param j
+	 * 		-Integer value to be converted to latitude
+	 * @return double
+	 */
 	public double getLat(int j) {
 		return 5 * (j - 18);
 	}
 
+	/**
+	 * Gets the longitude of Box
+	 * 
+	 * @param i
+	 * 		-Integer value to be converted to longitude
+	 * @return double
+	 */
 	public double getLong(int i) {
 		return 10 * (i - 18);
 	}
 
+	/**
+	 * Calls to Flickr or cache to retreive photos and assigns them to boxes.
+	 * 
+	 * @param useCache
+	 * 			-boolean value indicating whether or not to use cache to retrieve photos.
+	 * @param pages
+	 * 			-integer value indicating number of pages
+	 * 
+	 * @throws XPathExpressionException
+	 * @throws DOMException
+	 * @throws IOException
+	 */
 	public void getPhotos(boolean useCache, int pages) throws XPathExpressionException,
 			DOMException, IOException {
 
@@ -71,6 +108,9 @@ public class Boxfinder {
 		// + (e - s));
 	}
 
+	/**
+	 * Assigns photos to boxes based on latitude and longitude.
+	 */
 	public void assignPhotosToBoxes() {
 		for (Photo p : photos) {
 			int i, j;
