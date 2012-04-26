@@ -299,7 +299,7 @@ public class WorldView implements ActionListener {
 		gps = new GoogleMap(scale);
 		MID_HEIGHT = (int) (scale*400);
 		MAP_WIDTH = (int) (scale*500);
-		frame.setSize(500+ MAP_WIDTH, 50 + MID_HEIGHT);
+		frame.setSize(520+ MAP_WIDTH, 50 + MID_HEIGHT);
 		File cache = new File("cache.txt");
 		if (cache.exists()) {
 			// Custom button text
