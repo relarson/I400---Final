@@ -16,14 +16,14 @@ public class GoogleMap {
 	private double pixelsPerRadian;
 
 	/* Brett's comment */
-	public GoogleMap() {
+	public GoogleMap(double scale) {
 		this.centerLat = 0;
 		this.centerLon = 0;
-		this.width = 1000;
-		this.height = 800;
+		this.width = (int) (500 * scale);
+		this.height = (int) (400 * scale);
 		this.zoom = 1;
 
-		double realWidth = 500.00 * Math.pow(2, zoom);
+		double realWidth = 250.00 * scale * Math.pow(2, zoom);
 
 		pixelsPerDegree = realWidth / 360.00;
 		pixelsPerRadian = realWidth / (2.00 * Math.PI);

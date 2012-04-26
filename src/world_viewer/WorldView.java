@@ -46,7 +46,7 @@ public class WorldView implements ActionListener {
 	private Icon defaultIcon = createImageIcon("Blue1.png", "Node", iconS, iconS);
 	private Icon selectedIcon = createImageIcon("Green1.png", "Node Selected", iconS, iconS);
 
-	private GoogleMap gps = new GoogleMap();
+	private static GoogleMap gps;
 	private static Boxfinder boxMaker;
 	private Box[][] boxes = new Box[36][36];
 	private ArrayList<Photo> boxPhotos = new ArrayList<Photo>();
@@ -58,6 +58,7 @@ public class WorldView implements ActionListener {
 
 	private static boolean useCache = false;
 	private static int pages = 10;
+	private static double scale = 1;
 
 	private int current;
 
@@ -82,7 +83,7 @@ public class WorldView implements ActionListener {
 		pLabel = new JLabel(selectedPhotoImage);
 		pLabel.setIcon(createImageIcon(
 				"http://maps.google.com/maps/api/staticmap?center=0,0&zoom=1&size=500x400&scale=2&sensor=false",
-				"map", 0, 0));
+				"map", (int) (500*scale), (int) (400*scale)));
 
 		MapPanel.add(pLabel, BorderLayout.CENTER);
 		boxes = boxMaker.photoGrid;
@@ -257,15 +258,15 @@ public class WorldView implements ActionListener {
 			catch (MalformedURLException MUE) {
 			}
 			if (imgURL != null) {
-				if (width <= 0)
-					width = -1;
-				if (height <= 0)
-					height = -1;
-				// Image img =
-				// java.awt.Toolkit.getDefaultToolkit().createImage(imgURL).getScaledInstance(width,
-				// height, Image.SCALE_SMOOTH);
+				if (width == 0 && height == 0) {
+					return new ImageIcon(imgURL, description);
+				}
+				else {
+					Image img = java.awt.Toolkit.getDefaultToolkit().createImage(imgURL).getScaledInstance(width, height, Image.SCALE_SMOOTH);
+					return new ImageIcon(img, description);
+				}
 
-				return new ImageIcon(imgURL, description);
+				
 			}
 			else {
 				System.err.println("Couldn't find file: " + path);
@@ -282,7 +283,21 @@ public class WorldView implements ActionListener {
 		JFrame frame = new JFrame("Map");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		WindowUtilities.setNativeLookAndFeel();
-
+		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
+		frame.setSize(1500, 850);
+		frame.setLocationRelativeTo(null);
+		frame.pack();
+		if (screen.getWidth() <= 1000) {
+			scale = 1;
+		}
+		else if (screen.getWidth() < 1500) {
+			scale = 1.5;
+		}
+		else {
+			scale = 2;
+		}
+		gps = new GoogleMap(scale);
+		frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		File cache = new File("cache.txt");
 		if (cache.exists()) {
 			// Custom button text
@@ -319,12 +334,6 @@ public class WorldView implements ActionListener {
 		}
 		boxMaker = new Boxfinder(useCache, pages);
 		frame.add(new WorldView().getPanel());
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		frame.setSize(1500, 850);
-		frame.setLocationRelativeTo(null);
-		frame.pack();
-		if (screen.getHeight() <= 800)
-			frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		frame.setVisible(true);
 		frame.toFront();
 	}
