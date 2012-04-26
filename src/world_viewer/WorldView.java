@@ -1,7 +1,7 @@
 package world_viewer;
 
 /**
- * @author Ross Larson 
+ * @author Ross Larson
  * @author Brett Poirier
  * @class INFO-I 400
  */
@@ -181,8 +181,7 @@ public class WorldView implements ActionListener {
 	/**
 	 * Handles button press input for next and previous buttons.
 	 * 
-	 * @param e
-	 *            - Event to be handled
+	 * @param e - Event to be handled
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
@@ -387,9 +386,7 @@ public class WorldView implements ActionListener {
 	/**
 	 * Starts the GUI and program
 	 * 
-	 * @param args
-	 *            - There should be NO arguments from the command line (they
-	 *            will be ignored)
+	 * @param args - There should be NO arguments from the command line (they will be ignored)
 	 */
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {

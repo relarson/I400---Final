@@ -33,8 +33,7 @@ public class MapNode {
 	/**
 	 * Checks for equality of MapNodes.
 	 * 
-	 * @param other
-	 *            -MapNode to be compared
+	 * @param other -MapNode to be compared
 	 * 
 	 * @return boolean
 	 */

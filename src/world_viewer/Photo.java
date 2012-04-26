@@ -14,12 +14,9 @@ public class Photo {
 	/**
 	 * Construct a photo object
 	 * 
-	 * @param imageURL
-	 *            - The photo's URL
-	 * @param latitude
-	 *            - Latitude coordinate of the Photo
-	 * @param longitude
-	 *            - Longitude coordinate of the Photo
+	 * @param imageURL - The photo's URL
+	 * @param latitude - Latitude coordinate of the Photo
+	 * @param longitude - Longitude coordinate of the Photo
 	 */
 	public Photo(int ID, String title, String imageURL, double latitude, double longitude) {
 		this.ID = ID;
@@ -32,8 +29,7 @@ public class Photo {
 	/**
 	 * Checks equality of photos.
 	 * 
-	 * @param other
-	 *            -Photo the user wishes to compare to
+	 * @param other -Photo the user wishes to compare to
 	 * 
 	 * @return boolean
 	 */

@@ -18,8 +18,7 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.NodeList;
 
 /**
- * @notes We made the decision to have no tags perform a Parameterless search of
- *        Flickr
+ * @notes We made the decision to have no tags perform a Parameterless search of Flickr
  */
 
 public class Flickr {
@@ -31,8 +30,7 @@ public class Flickr {
 	}
 
 	/**
-	 * @param tags
-	 *            - the tag(s) to look for in Flickr Database
+	 * @param tags - the tag(s) to look for in Flickr Database
 	 * @throws IOException
 	 * @throws DOMException
 	 * @throws XPathExpressionException
@@ -86,8 +84,7 @@ public class Flickr {
 	}
 
 	/**
-	 * Retrieves photos from cache and places them in an ArrayList for
-	 * assignment to boxes.
+	 * Retrieves photos from cache and places them in an ArrayList for assignment to boxes.
 	 * 
 	 * @return ArrayList<Photo> - ArrayList of all photos.
 	 * @throws IOException
@@ -129,8 +126,7 @@ public class Flickr {
 	/**
 	 * To search for photos by tags
 	 * 
-	 * @param tags
-	 *            - tags to search for
+	 * @param tags - tags to search for
 	 * @return the xml return from {@link #httpGet(String) httpGet(String)}
 	 * @throws IOException
 	 */
@@ -149,8 +145,7 @@ public class Flickr {
 	/**
 	 * code for making a restful Get request
 	 * 
-	 * @param urlStr
-	 *            - the URL to get a connection too
+	 * @param urlStr - the URL to get a connection too
 	 * @return the responce from the URL from urlStr
 	 * @throws IOException
 	 */

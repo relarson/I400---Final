@@ -22,10 +22,8 @@ public class Boxfinder {
 	/**
 	 * Creates Boxfinder object.
 	 * 
-	 * @param useCache
-	 *            -boolean value that indicates whether or not to use cache.
-	 * @param pages
-	 *            -integer value indicating the number of pages cached.
+	 * @param useCache -boolean value that indicates whether or not to use cache.
+	 * @param pages -integer value indicating the number of pages cached.
 	 */
 	public Boxfinder(boolean useCache, int pages) {
 		createBoxes();
@@ -57,8 +55,7 @@ public class Boxfinder {
 	/**
 	 * Gets the latitude of Box.
 	 * 
-	 * @param j
-	 *            -Integer value to be converted to latitude
+	 * @param j -Integer value to be converted to latitude
 	 * @return double
 	 */
 	public double getLat(int j) {
@@ -68,8 +65,7 @@ public class Boxfinder {
 	/**
 	 * Gets the longitude of Box
 	 * 
-	 * @param i
-	 *            -Integer value to be converted to longitude
+	 * @param i -Integer value to be converted to longitude
 	 * @return double
 	 */
 	public double getLong(int i) {
@@ -79,11 +75,8 @@ public class Boxfinder {
 	/**
 	 * Calls to Flickr or cache to retreive photos and assigns them to boxes.
 	 * 
-	 * @param useCache
-	 *            -boolean value indicating whether or not to use cache to
-	 *            retrieve photos.
-	 * @param pages
-	 *            -integer value indicating number of pages
+	 * @param useCache -boolean value indicating whether or not to use cache to retrieve photos.
+	 * @param pages -integer value indicating number of pages
 	 * 
 	 * @throws XPathExpressionException
 	 * @throws DOMException
