@@ -33,7 +33,7 @@ public class Photo {
 	 * Checks equality of photos.
 	 * 
 	 * @param other
-	 * 	-Photo the user wishes to compare to
+	 *            -Photo the user wishes to compare to
 	 * 
 	 * @return boolean
 	 */

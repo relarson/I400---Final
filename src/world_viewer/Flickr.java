@@ -86,10 +86,10 @@ public class Flickr {
 	}
 
 	/**
-	 * Retrieves photos from cache and places them in an ArrayList for assignment to boxes.
+	 * Retrieves photos from cache and places them in an ArrayList for
+	 * assignment to boxes.
 	 * 
-	 * @return ArrayList<Photo>
-	 * 			- ArrayList of all photos.
+	 * @return ArrayList<Photo> - ArrayList of all photos.
 	 * @throws IOException
 	 */
 	public ArrayList<Photo> uncache() throws IOException {

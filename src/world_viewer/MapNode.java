@@ -24,8 +24,7 @@ public class MapNode {
 	/**
 	 * Returns a useful string representation of the MapNode's properties.
 	 * 
-	 * @return String
-	 * 	-Useful representation of MapNode's properties.
+	 * @return String -Useful representation of MapNode's properties.
 	 */
 	public String toString() {
 		return "Lat: " + latitude + ", Long: " + longitude;
@@ -35,7 +34,7 @@ public class MapNode {
 	 * Checks for equality of MapNodes.
 	 * 
 	 * @param other
-	 * 	-MapNode to be compared
+	 *            -MapNode to be compared
 	 * 
 	 * @return boolean
 	 */

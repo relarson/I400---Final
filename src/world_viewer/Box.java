@@ -17,15 +17,15 @@ public class Box {
 	public int ID;
 	public MapNode point;
 	public Comparator<Photo> comparator = new Comparator<Photo>() {
-		
+
 		/**
-		 * Compares two photos and returns -1 if photo a is closer to box center, 1 if photo b is closer,
-		 * and 0 if the distances are equal.
+		 * Compares two photos and returns -1 if photo a is closer to box
+		 * center, 1 if photo b is closer, and 0 if the distances are equal.
 		 * 
 		 * @param a
-		 * 	-Photo
+		 *            -Photo
 		 * @param b
-		 * 	-Photo
+		 *            -Photo
 		 * 
 		 * @return int
 		 */
@@ -48,9 +48,9 @@ public class Box {
 	 * Creates a Box object
 	 * 
 	 * @param ID
-	 * 			-Integer Identification number for Box.
+	 *            -Integer Identification number for Box.
 	 * @param point
-	 * 			-MapNode corresponding to the Box's point.
+	 *            -MapNode corresponding to the Box's point.
 	 */
 	public Box(int ID, MapNode point) {
 		this.ID = ID;
@@ -61,7 +61,7 @@ public class Box {
 	 * Adds a photo to the global photo list.
 	 * 
 	 * @param p
-	 * 	-Photo to be added.
+	 *            -Photo to be added.
 	 */
 	public void add(Photo p) {
 		photos.add(p);
@@ -71,7 +71,7 @@ public class Box {
 	 * Calculates distance between photo and Box center.
 	 * 
 	 * @param s
-	 * 		-MapNode at center of Box.
+	 *            -MapNode at center of Box.
 	 * @param e
 	 * 
 	 * @return double
@@ -88,7 +88,7 @@ public class Box {
 	 * Checks for equality of boxes.
 	 * 
 	 * @param e
-	 * 		-Box to be checked for equality.
+	 *            -Box to be checked for equality.
 	 * 
 	 * @return boolean
 	 */

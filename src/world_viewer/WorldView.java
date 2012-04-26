@@ -62,7 +62,7 @@ public class WorldView implements ActionListener {
 	private static double scale = 1;
 
 	private int current;
-	
+
 	/**
 	 * Constructs a WorldView object
 	 */
@@ -77,7 +77,7 @@ public class WorldView implements ActionListener {
 		mainPanel.add(MapPanel, BorderLayout.WEST);
 		mainPanel.add(photoPanel, BorderLayout.EAST);
 	}
-	
+
 	/**
 	 * Creates the Map Panel for the WorldView Application
 	 * 
@@ -93,7 +93,7 @@ public class WorldView implements ActionListener {
 		pLabel = new JLabel(selectedPhotoImage);
 		pLabel.setIcon(createImageIcon(
 				"http://maps.google.com/maps/api/staticmap?center=0,0&zoom=1&size=500x400&scale=2&sensor=false",
-				"map", (int) (500*scale), (int) (400*scale)));
+				"map", (int) (500 * scale), (int) (400 * scale)));
 
 		MapPanel.add(pLabel, BorderLayout.CENTER);
 		boxes = boxMaker.photoGrid;
@@ -181,7 +181,8 @@ public class WorldView implements ActionListener {
 	/**
 	 * Handles button press input for next and previous buttons.
 	 * 
-	 * @param e - Event to be handled
+	 * @param e
+	 *            - Event to be handled
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
@@ -207,7 +208,7 @@ public class WorldView implements ActionListener {
 			// load up first photo
 			if (boxPhotos.size() >= 1) {
 				Photo p = boxPhotos.get(0);
-				//System.out.println(p.toString());
+				// System.out.println(p.toString());
 				// System.out.println("(" + jB.getX() + ", " + jB.getY() + ")");
 				photoLabel.setIcon(createImageIcon(p.imageURL, p.title, 0, 0));
 				current = 0;
@@ -291,11 +292,11 @@ public class WorldView implements ActionListener {
 					return new ImageIcon(imgURL, description);
 				}
 				else {
-					Image img = java.awt.Toolkit.getDefaultToolkit().createImage(imgURL).getScaledInstance(width, height, Image.SCALE_SMOOTH);
+					Image img = java.awt.Toolkit.getDefaultToolkit().createImage(imgURL)
+							.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 					return new ImageIcon(img, description);
 				}
 
-				
 			}
 			else {
 				System.err.println("Couldn't find file: " + path);
@@ -307,22 +308,21 @@ public class WorldView implements ActionListener {
 	/**
 	 * Gets the main panel for WorldView.
 	 * 
-	 * @return JPanel
-	 * 	-main panel for WorldView
+	 * @return JPanel -main panel for WorldView
 	 */
 	public JPanel getPanel() {
 		return mainPanel;
 	}
-	
+
 	/**
-	 * Creates and displays the GUI for WorldView 
+	 * Creates and displays the GUI for WorldView
 	 */
 	private static void createAndShowGUI() {
 		JFrame frame = new JFrame("Map");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		WindowUtilities.setNativeLookAndFeel();
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		//frame.setLocationRelativeTo(null);
+		// frame.setLocationRelativeTo(null);
 		frame.pack();
 		frame.setResizable(false);
 		if (screen.getWidth() <= 1270) {
@@ -335,9 +335,9 @@ public class WorldView implements ActionListener {
 			scale = 2;
 		}
 		gps = new GoogleMap(scale);
-		MID_HEIGHT = (int) (scale*400);
-		MAP_WIDTH = (int) (scale*500);
-		frame.setSize(520+ MAP_WIDTH, 50 + MID_HEIGHT);
+		MID_HEIGHT = (int) (scale * 400);
+		MAP_WIDTH = (int) (scale * 500);
+		frame.setSize(520 + MAP_WIDTH, 50 + MID_HEIGHT);
 		File cache = new File("cache.txt");
 		if (cache.exists()) {
 			// Custom button text
@@ -369,10 +369,10 @@ public class WorldView implements ActionListener {
 			try {
 				p = Integer.parseInt(s);
 			}
-			catch (Exception e){
+			catch (Exception e) {
 				// do nothing!
 			}
-			
+
 			if (p == 0) {
 				System.exit(0);
 			}

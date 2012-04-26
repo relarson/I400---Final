@@ -19,7 +19,8 @@ public class GoogleMap {
 	 * Creates GoogleMap object.
 	 * 
 	 * @param scale
-	 * 	-Scaling factor for adjustment to different screen resolutions.
+	 *            -Scaling factor for adjustment to different screen
+	 *            resolutions.
 	 */
 	public GoogleMap(double scale) {
 		this.centerLat = 0;
@@ -46,10 +47,11 @@ public class GoogleMap {
 	}
 
 	/**
-	 * Converts a longitude coordinate to an integer x to be plotted on WorldView GUI.
+	 * Converts a longitude coordinate to an integer x to be plotted on
+	 * WorldView GUI.
 	 * 
 	 * @param lon
-	 * 	-longitude coordinate
+	 *            -longitude coordinate
 	 * 
 	 * @return int
 	 */
@@ -58,10 +60,11 @@ public class GoogleMap {
 	}
 
 	/**
-	 * Converts a latitude coordinate to an integer y to be plotted on WorldView GUI.
+	 * Converts a latitude coordinate to an integer y to be plotted on WorldView
+	 * GUI.
 	 * 
 	 * @param lat
-	 * 	-latitude coordinate
+	 *            -latitude coordinate
 	 * 
 	 * @return int
 	 */
