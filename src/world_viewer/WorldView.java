@@ -328,7 +328,13 @@ public class WorldView implements ActionListener {
 					"How many photos would you like? Each batch of 250 takes ~4 seconds",
 					"Number of Photos", JOptionPane.PLAIN_MESSAGE, null, null, "2500");
 			int p = 2500;
-			p = Integer.parseInt(s);
+			try {
+				p = Integer.parseInt(s);
+			}
+			catch (Exception e){
+				// do nothing!
+			}
+			
 			if (p == 0) {
 				System.exit(0);
 			}
