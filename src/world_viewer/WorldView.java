@@ -181,7 +181,7 @@ public class WorldView implements ActionListener {
 	/**
 	 * Handles button press input for next and previous buttons.
 	 * 
-	 * @param ActionEvent
+	 * @param e - Event to be handled
 	 */
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
