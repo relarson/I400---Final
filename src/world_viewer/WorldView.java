@@ -30,6 +30,8 @@ import javax.swing.SwingConstants;
 
 public class WorldView implements ActionListener {
 
+        private static JFrame frame;
+    
 	private JPanel mainPanel = new JPanel();
 	private JPanel MapPanel = new JPanel();
 	private JPanel photoPanel = new JPanel();
@@ -312,12 +314,25 @@ public class WorldView implements ActionListener {
 	public JPanel getPanel() {
 		return mainPanel;
 	}
+	
+	public static String getSearchTerm() {
+	    String s = (String) JOptionPane.showInputDialog(frame,
+                    "What term would you like to search?",
+                    "Search term", JOptionPane.PLAIN_MESSAGE, null, null, "technology");
+	    s = s.trim().toLowerCase();
+	    if (s.equals("")) {
+	        return "technology";
+	    }
+	    else {
+	        return s;
+	    }
+	}
 
 	/**
 	 * Creates and displays the GUI for WorldView
 	 */
 	private static void createAndShowGUI() {
-		JFrame frame = new JFrame("Map");
+		frame = new JFrame("Map");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		WindowUtilities.setNativeLookAndFeel();
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -337,7 +352,8 @@ public class WorldView implements ActionListener {
 		MID_HEIGHT = (int) (scale * 400);
 		MAP_WIDTH = (int) (scale * 500);
 		frame.setSize(520 + MAP_WIDTH, 50 + MID_HEIGHT);
-		File cache = new File("cache.txt");
+		String term = getSearchTerm();
+		File cache = new File("caches/" + term + ".txt");
 		if (cache.exists()) {
 			// Custom button text
 			Object[] options = { "Load from cache", "Download from Flickr", "Cancel" };
@@ -350,7 +366,7 @@ public class WorldView implements ActionListener {
 			}
 			else if (n == 1) {
 				String s = (String) JOptionPane.showInputDialog(frame,
-						"How many pages would you like? Each page takes ~4 seconds",
+						"How many pages would you like? Each page takes ~4 seconds and has 250 photos.",
 						"Number of Pages of Photos", JOptionPane.PLAIN_MESSAGE, null, null, "10");
 				int p = 10;
 				p = Integer.parseInt(s);
@@ -362,7 +378,7 @@ public class WorldView implements ActionListener {
 		}
 		else {
 			String s = (String) JOptionPane.showInputDialog(frame,
-					"How many photos would you like? Each batch of 250 takes ~4 seconds",
+					"How many photos would you like? Each batch of 250 takes ~4 seconds.",
 					"Number of Photos", JOptionPane.PLAIN_MESSAGE, null, null, "2500");
 			int p = 2500;
 			try {
@@ -373,11 +389,11 @@ public class WorldView implements ActionListener {
 			}
 
 			if (p == 0) {
-				System.exit(0);
+				System.exit(1);
 			}
-			pages = p;
+			pages = (int) ((p/250.0) + .5);
 		}
-		boxMaker = new Boxfinder(useCache, pages);
+		boxMaker = new Boxfinder(term, useCache, pages);
 		frame.add(new WorldView().getPanel());
 		frame.setVisible(true);
 		frame.toFront();

@@ -71,13 +71,13 @@ public class Flickr {
 		// System.out.println(pages + " pages collected in " + (end - start) +
 		// " milliseconds.");
 
-		File cache = new File("cache.txt");
+		File cache = new File("caches/" + tags + ".txt");
 		if (cache != null) {
 			cache.delete();
 		}
 		cache.createNewFile();
 
-		FileWriter writer = new FileWriter("cache.txt");
+		FileWriter writer = new FileWriter("caches/" + tags + ".txt");
 		BufferedWriter out = new BufferedWriter(writer);
 		out.write(output);
 		out.close();
@@ -89,9 +89,9 @@ public class Flickr {
 	 * @return ArrayList<Photo> - ArrayList of all photos.
 	 * @throws IOException
 	 */
-	public ArrayList<Photo> uncache() throws IOException {
+	public ArrayList<Photo> uncache(String cacheFile) throws IOException {
 		ArrayList<Photo> al = new ArrayList<Photo>();
-		File cache = new File("cache.txt");
+		File cache = new File("caches/" + cacheFile);
 		FileReader cacheReader = new FileReader(cache);
 		BufferedReader bufferedCache = new BufferedReader(cacheReader);
 		bufferedCache.readLine();

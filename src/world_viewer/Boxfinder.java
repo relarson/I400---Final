@@ -25,10 +25,10 @@ public class Boxfinder {
 	 * @param useCache -boolean value that indicates whether or not to use cache.
 	 * @param pages -integer value indicating the number of pages cached.
 	 */
-	public Boxfinder(boolean useCache, int pages) {
+	public Boxfinder(String tags, boolean useCache, int pages) {
 		createBoxes();
 		try {
-			getPhotos(useCache, pages);
+			getPhotos(tags, useCache, pages);
 		}
 		catch (XPathExpressionException e) {
 			e.printStackTrace();
@@ -82,16 +82,16 @@ public class Boxfinder {
 	 * @throws DOMException
 	 * @throws IOException
 	 */
-	public void getPhotos(boolean useCache, int pages) throws XPathExpressionException,
+	public void getPhotos(String tags, boolean useCache, int pages) throws XPathExpressionException,
 			DOMException, IOException {
 
 		// Long s = System.currentTimeMillis();
 		if (useCache) {
-			photos = flick.uncache();
+			photos = flick.uncache(tags+".txt");
 		}
 		else {
-			flick.cache("technology", pages);
-			photos = flick.uncache();
+			flick.cache(tags, pages);
+			photos = flick.uncache(tags+".txt");
 		}
 
 		// Long p = System.currentTimeMillis();
