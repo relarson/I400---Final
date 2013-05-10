@@ -41,7 +41,7 @@ public class Flickr {
 
 		int page = 1, pages = 1;
 
-		// long start = System.currentTimeMillis();
+		//long start = System.currentTimeMillis();
 		String flickResults = flickrSearch(tags, 1);
 		xpath = new XPathReader(flickResults);
 		pages = Integer.parseInt((String) xpath.read("//photos/@pages", XPathConstants.STRING));
@@ -54,22 +54,22 @@ public class Flickr {
 
 		while (page <= pages) {
 			output = output + flickResults + "\n";
-			// long curr = System.currentTimeMillis();
-			// System.out.println(page + " / " + pages +
+			//long curr = System.currentTimeMillis();
+			//System.out.println(page + " / " + pages +
 			// " collected. Elapsed time: " + (curr - start)
 			// + " milliseconds.");
 			page++;
 			if (page <= pages) {
 				flickResults = flickrSearch(tags, page);
-				// long after = System.currentTimeMillis();
-				// System.out.println("Page # " + page + " took " + (after -
-				// curr)
-				// + " milliseconds to request and retrieve.");
+				//long after = System.currentTimeMillis();
+				//System.out.println("Page # " + page + " took " + (after -
+				//curr)
+				//+ " milliseconds to request and retrieve.");
 			}
 		}
-		// long end = System.currentTimeMillis();
-		// System.out.println(pages + " pages collected in " + (end - start) +
-		// " milliseconds.");
+		//long end = System.currentTimeMillis();
+		//System.out.println(pages + " pages collected in " + (end - start) +
+		//" milliseconds.");
 
 		File cache = new File("caches/" + tags + ".txt");
 		if (cache != null) {
