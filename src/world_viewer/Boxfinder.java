@@ -86,13 +86,10 @@ public class Boxfinder {
 			DOMException, IOException {
 
 		// Long s = System.currentTimeMillis();
-		if (useCache) {
-			photos = flick.uncache(tags+".txt");
+		if (!useCache) {
+		    flick.cache(tags, pages);
 		}
-		else {
-			flick.cache(tags, pages);
-			photos = flick.uncache(tags+".txt");
-		}
+		photos = flick.uncache(tags+".txt");
 
 		// Long p = System.currentTimeMillis();
 		assignPhotosToBoxes();
